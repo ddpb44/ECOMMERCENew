@@ -39,7 +39,7 @@ public class CategorieServiceImpl implements ICategorieService {
 	@Override
 	public Categorie addCategorie(Categorie cat) {
 		// TODO addCategorie
-		return null;
+		return catDao.addCategorie(cat);
 	}
 
 	/**
