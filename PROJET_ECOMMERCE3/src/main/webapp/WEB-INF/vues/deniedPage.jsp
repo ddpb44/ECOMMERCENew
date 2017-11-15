@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Index</title>
+<title>Page accès refusé</title>
 </head>
 <body>
 
-	<%
-		response.sendRedirect("login");
-	%>
+	<h3 style="color: red; text-align: center">Vous n'êtes pas
+		autorisé à voir cette page</h3>
+
+	<a href="${pageContext.request.contextPath}">Réessayer</a>
 
 </body>
 </html>
