@@ -36,6 +36,14 @@
 			<artifactId>spring-beans</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
+		
+		<!-- spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- le module de spring qui nous permet d'integrer un orm avec Spring 
 			IOC (Hibernate) -->
