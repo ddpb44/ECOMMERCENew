@@ -6,7 +6,7 @@ import fr.adaming.model.Categorie;
 
 public interface ICategorieService {
 
-	// TODO getCategorieById
+	// TODO getCategorieByName
 	public Categorie getCatByName(String name);
 
 	// TODO addCategorie

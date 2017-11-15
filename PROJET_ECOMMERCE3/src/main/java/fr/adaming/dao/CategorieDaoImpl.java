@@ -34,7 +34,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	 * To get a "Categorie" with its name
 	 * 
 	 * @param name
-	 * the name of the "categorie" searched
+	 *            the name of the "categorie" searched
 	 * 
 	 * @return the "categorie" searched in the database
 	 */
@@ -58,22 +58,66 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	}
 
+	/**
+	 * Add a Categorie to the existing list of Categories
+	 * 
+	 * @param cat
+	 *            The Categorie to add
+	 * 
+	 * @return The added Categorie
+	 */
 	@Override
 	public Categorie addCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO addCategorie
+
+		// 1. Récupérer la session
+		Session hbs = sf.getCurrentSession();
+
+		// 2. Sauvegarder la catégorie dans la base de données
+		hbs.save(cat);
+		return cat;
 	}
 
+	/**
+	 * Delete a Categorie from the existing list of Categories
+	 * 
+	 * @param cat
+	 *            The Categorie to delete
+	 * 
+	 * @return The deleted Categorie
+	 */
 	@Override
 	public Categorie deleteCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO deleteCategorie
+
+		// 1. Récupérer la session
+		Session hbs = sf.getCurrentSession();
+
+		// 2. Supprimer la catégorie dans la base de données
+		hbs.delete(cat);
+
+		return cat;
 	}
 
+	/**
+	 * Update a Categorie and modify the list of Categories
+	 * 
+	 * @param cat
+	 *            The Categorie to update
+	 * 
+	 * @return The updated Categorie
+	 */
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO updateCategorie
+
+		// 1. Récupérer la session
+		Session hbs = sf.getCurrentSession();
+
+		// 2. Modifier l'étudiant dans la base de données
+		hbs.saveOrUpdate(cat);
+
+		return cat;
 	}
 
 	/**

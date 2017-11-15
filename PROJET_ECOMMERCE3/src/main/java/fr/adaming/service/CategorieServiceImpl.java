@@ -31,22 +31,37 @@ public class CategorieServiceImpl implements ICategorieService {
 	// Méthodes
 	// ============================================
 
+	/**
+	 * Service method to add a Categorie to the existing list of Categories
+	 * 
+	 * @return The added Categorie recovered from Dao method
+	 */
 	@Override
 	public Categorie addCategorie(Categorie cat) {
 		// TODO addCategorie
 		return null;
 	}
 
+	/**
+	 * Service method to delete a Categorie from the existing list of Categories
+	 * 
+	 * @return The deleted Categorie recovered from Dao method
+	 */
 	@Override
 	public Categorie deleteCategorie(Categorie cat) {
 		// TODO deleteCategorie
-		return null;
+		return catDao.deleteCategorie(cat);
 	}
 
+	/**
+	 * Service method to update a Categorie and modify the list of Categories
+	 * 
+	 * @return A list of all Categories recovered from Dao method
+	 */
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
 		// TODO updateCategorie
-		return null;
+		return catDao.updateCategorie(cat);
 	}
 
 	/**
@@ -59,11 +74,12 @@ public class CategorieServiceImpl implements ICategorieService {
 		// TODO getAllCategorie
 		return catDao.getAllCategorie();
 	}
+
 	/**
 	 * To get a "Categorie" with its name
 	 * 
 	 * @param name
-	 * the name of the "categorie" searched
+	 *            the name of the "categorie" searched
 	 * 
 	 * @return the "categorie" searched in the database with DaoMethod
 	 */
