@@ -32,6 +32,7 @@ public class CategorieTest {
 
 	// ============== TODO Test de getAllCategorie
 	// Taille de la liste
+	@Ignore
 	@Test
 	public void testGetAllCategorieTaille() {
 
