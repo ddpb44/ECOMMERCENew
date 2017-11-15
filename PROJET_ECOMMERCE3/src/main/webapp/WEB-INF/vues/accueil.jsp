@@ -7,7 +7,11 @@
 <html>
 
 <head>
-
+<link href='<c:url value="/resources/css/bootstrap.css"></c:url>'
+	rel="stylesheet" />
+<link href='<c:url value="/resources/css/bootstrap-theme.css"></c:url>'
+	rel="stylesheet" />
+	
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Page d'accueil</title>
 
@@ -15,29 +19,16 @@
 
 <body>
 
-	<div class="marque">Concept Store</div>
-
-	<div class="slogan">Votre boutique conceptuelle</div>
-
-	<div class="login">
-
-		<h2>Connexion administrateur</h2>
-
-		<form action="connexion" method="post">
-			Identifiant : <input type="text" name="j_username"> <br />
-
-			Mot de passe : <input type="password" name="j_password"> <br />
-
-			<input type="submit" value="Se connecter">
-		</form>
-
-		<c:if test="${not empty erreur}">
-			<h1>Login ou Mot de passe erroné</h1>
-		</c:if>
-
-		<h2>Accueil client</h2>
-
-	</div>
+	<h2>
+		<a href="${pageContext.request.contextPath}/admin/principal/pageAdmin">
+			Aller vers la page ADMIN</a>
+	</h2>
+	<br />
+	<h2>
+		<a
+			href="${pageContext.request.contextPath}/admin/produits/pageAdminProduits">
+			Aller vers la page ADMIN PROD</a>
+	</h2>
 
 </body>
 </html>

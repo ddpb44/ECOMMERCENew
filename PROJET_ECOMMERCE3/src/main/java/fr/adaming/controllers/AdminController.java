@@ -6,9 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public String affichePageAccueil(){
+		
+		return "accueil";
+	}
 
-	@RequestMapping(value = "admin/pageAdmin", method = RequestMethod.GET)
+	@RequestMapping(value = "principal/pageAdmin", method = RequestMethod.GET)
 	public String affichePageAdmin(ModelMap modele) {
 
 		modele.addAttribute("message", "Bonjour M.admin !! Vous êtes dans votre page ADMIN");
@@ -16,12 +23,11 @@ public class AdminController {
 		return "adminPage";
 	}
 
-	@RequestMapping(value = "adminprod/pageAdminProd", method = RequestMethod.GET)
-	public String affichePageEmploye(ModelMap modele) {
+	@RequestMapping(value = "produits/pageAdminProduits", method = RequestMethod.GET)
+	public String affichePageAdminProd(ModelMap modele) {
 
-		modele.addAttribute("message", "Bonjour M.adminProd !! Vous êtes dans votre page ADMIN PROD");
+		modele.addAttribute("message", "Bonjour M.admin !! Vous êtes dans votre page ADMIN");
 
 		return "adminProdPage";
 	}
-
 }

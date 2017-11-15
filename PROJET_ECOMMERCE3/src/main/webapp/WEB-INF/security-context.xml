@@ -20,10 +20,10 @@
 	<!-- 1-Configuration de la partie Autorisation -->
 	<security:http>
 		<!-- Proteger les url et autoriser pour l'admin -->
-		<security:intercept-url pattern="/admin/**"
+		<security:intercept-url pattern="/admin/principal/**"
 			access="ROLE_ADMIN" />
 
-		<security:intercept-url pattern="/adminprod/**"
+		<security:intercept-url pattern="/admin/produits/**"
 			access="ROLE_ADMINPROD" />
 
 		<!-- Pour utiliser un fomulaire perso -->
@@ -44,7 +44,7 @@
 		<security:authentication-provider>
 
 			<security:jdbc-user-service
-				data-source-ref="dataSourceBean" users-by-username-query="select mail,mdp from admins where mail=? "
+				data-source-ref="dataSourceBean" users-by-username-query="select mail,mdp,actived from admins where mail=? "
 				authorities-by-username-query="select a.mail, r.nom from admins a, roles r where a.id_admin=r.admin_id and a.mail=?" />
 
 

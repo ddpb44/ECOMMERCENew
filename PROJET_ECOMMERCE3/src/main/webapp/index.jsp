@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		response.sendRedirect("login");
+		response.sendRedirect("admin");
 	%>
 
 </body>

@@ -25,6 +25,8 @@ public class Admin implements Serializable {
 	
 	private String mdp;
 	
+	private boolean actived;
+	
 	@OneToMany(mappedBy="admin")
 	private List<Role> listeRole;
 

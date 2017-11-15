@@ -12,14 +12,14 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginMethod() {
 
-		return "accueil";
+		return "loginPage";
 	}
 
 	// Deconnexion
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String seDeconnecter() {
 
-		return "accueil";
+		return "loginPage";
 
 	}
 
@@ -27,7 +27,7 @@ public class LoginController {
 	public String loginErreur(ModelMap modele) {
 
 		modele.addAttribute("erreur", true);
-		return "accueil";
+		return "loginPage";
 
 	}
 
