@@ -12,6 +12,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -39,6 +40,9 @@ public class CategorieTest {
 	// Méthodes de test
 	// ============================================
 
+	/**
+	 * To Test the method GetAllCategorieFirst (taille de la liste)
+	 */
 	// ============== TODO Test de getAllCategorie
 	// Taille de la liste
 	//@Ignore
@@ -51,6 +55,9 @@ public class CategorieTest {
 
 	}
 
+	/**
+	 * To Test the method GetAllCategorieFirst (firstElement)
+	 */
 	// Premier élément de la liste
 	//@Ignore
 	@Test
@@ -60,9 +67,11 @@ public class CategorieTest {
 		assertEquals(new String("Bonnes Ondes"), catService.getAllCategorie().get(0).getNomCategorie());
 
 	}
-	
+	/**
+	 * To Test the method getCatByName
+	 */
 	// ============== TODO Test de gatCatByName
-		// Tester la correspondance des noms et descriptions
+	// Tester la correspondance des noms et descriptions
 	//@Ignore
 	@Test
 	public void testGetCatByName(){
@@ -71,4 +80,26 @@ public class CategorieTest {
 		assertEquals(new String("Happy"), catService.getCatByName("Bonnes Ondes").getDescription());
 		
 	}
+	
+	/**
+	 * 
+	 * To Test the method addCategorie comparing the size of the list after using the method and before +1
+	 * 
+	 */
+	// ============== TODO Test de addCategorie
+	// Tester la correspondance des noms et descriptions
+	@Test
+	@Rollback
+	public void testaddCategorie(){
+		System.out.println("---------- Tester la méthode getCatByName");
+		Categorie c1 = new Categorie();
+		c1.setDescription("blabla");
+		c1.setNomCategorie("jeparle");
+		List<Categorie> liste_in = catService.getAllCategorie();
+		catService.addCategorie(c1);
+		assertEquals(catService.getAllCategorie().size(), liste_in.size()+1);
+		
+	}
+	
+	
 }
