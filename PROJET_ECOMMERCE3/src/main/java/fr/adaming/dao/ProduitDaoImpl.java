@@ -42,6 +42,12 @@ public class ProduitDaoImpl implements IProduitDao {
 		Session session = sf.getCurrentSession();
 		return (Produit) session.get(Produit.class, produit.getId_produit());
 	}
+	
+	@Override
+	public Produit getProduitByDes(Produit produit) {
+		Session session = sf.getCurrentSession();
+		return (Produit) session.get(Produit.class, produit.getId_produit());
+	}
 
 	@Override
 	public Produit addProduit(Produit produit) {
@@ -54,14 +60,26 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit updateProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sf.getCurrentSession();
+		
+		session.update(produit);
+		
+		return produit;
 	}
 
 	@Override
 	public int deleteProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		return 0;
+		Session session = sf.getCurrentSession();
+		
+		String req = "delete from Produit p where p.id_produit=:pId";
+		
+		Query query = session.createQuery(req);
+		
+		query.setParameter("pId", produit.getId_produit());
+		
+		int verif = query.executeUpdate();
+		
+		return verif;
 	}
 
 }
