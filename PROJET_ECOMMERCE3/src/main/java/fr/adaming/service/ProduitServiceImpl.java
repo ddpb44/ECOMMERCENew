@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Service
@@ -39,9 +40,9 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit addProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit addProduit(Produit produit, Categorie categorie) {
+		produit.setCat(categorie);
+		return prodDao.addProduit(produit);
 	}
 
 	@Override

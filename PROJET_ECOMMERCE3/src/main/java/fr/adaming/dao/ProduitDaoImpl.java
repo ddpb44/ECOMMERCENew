@@ -45,8 +45,11 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit addProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sf.getCurrentSession();
+		
+		session.save(produit);
+		
+		return produit;
 	}
 
 	@Override
