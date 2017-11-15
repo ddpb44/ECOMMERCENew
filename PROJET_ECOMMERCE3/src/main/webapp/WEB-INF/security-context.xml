@@ -6,10 +6,51 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<context:property-placeholder location="classpath*:bd.properties" />
+
+	<!-- Declaration du bean DATA SOURCE -->
+	<bean id="dataSourceBean"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.mdp}" />
+	</bean>
 
 	<!-- 1-Configuration de la partie Autorisation -->
 	<security:http>
+		<!-- Proteger les url et autoriser pour l'admin -->
+		<security:intercept-url pattern="/admin/**"
+			access="ROLE_ADMIN" />
+
+		<security:intercept-url pattern="/adminprod/**"
+			access="ROLE_ADMINPROD" />
+
+		<!-- Pour utiliser un fomulaire perso -->
+		<security:form-login login-page="/login"
+			authentication-failure-url="/loginEchec" login-processing-url="/connexion" />
+
+		<!-- Pour se deconnecter -->
+		<security:logout logout-success-url="/logout" />
+
+		<!-- Specifier l'url à appeler si l'acces est refusé -->
+		<security:access-denied-handler
+			error-page="/denied" />
+
 	</security:http>
+
+	<!-- 2- Configuration de la partie Authentification -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+
+			<security:jdbc-user-service
+				data-source-ref="dataSourceBean" users-by-username-query="select mail,mdp from admins where mail=? "
+				authorities-by-username-query="select a.mail, r.nom from admins a, roles r where a.id_admin=r.admin_id and a.mail=?" />
+
+
+		</security:authentication-provider>
+	</security:authentication-manager>
+
 
 
 </beans>
