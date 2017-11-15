@@ -3,13 +3,16 @@ package fr.adaming.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,6 +23,9 @@ public class AdminController {
 	// ===========================================
 	@Autowired
 	private ICategorieService catService;
+	
+	@Autowired
+	private IProduitService prodService;
 
 	// ===========================================
 	// Setter pour le Service
@@ -28,11 +34,18 @@ public class AdminController {
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
 	}
+	
+	public void setProdService(IProduitService prodService) {
+		this.prodService = prodService;
+	}
+
 
 	// ===========================================
 	// PostConstruct
 	// ===========================================
 
+
+	
 	// ===========================================
 	// Méthodes
 	// ===========================================
@@ -59,9 +72,12 @@ public class AdminController {
 		// Récupérer la liste des catégories
 		List<Categorie> listeCategories = catService.getAllCategorie();
 		
+		List<Produit> listeProduits = prodService.getAllProduits();
+		
 		modele.addAttribute("message", "Bonjour M.admin !! Vous êtes dans votre page ADMIN");
 		
 		modele.addAttribute("listeCat", listeCategories);
+		modele.addAttribute("listeProd", listeProduits);
 
 		return "adminPage";
 	}
