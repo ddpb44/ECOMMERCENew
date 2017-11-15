@@ -47,7 +47,7 @@ public class CategorieTest {
 
 		System.out.println("---------- Tester la méthode getAllCategorieTaille");
 		List<Categorie> liste = catService.getAllCategorie();
-		assertEquals(3, liste.size());
+		assertEquals(1, liste.size());
 
 	}
 
@@ -57,7 +57,18 @@ public class CategorieTest {
 	public void testGetAllCategorieFirst() {
 
 		System.out.println("---------- Tester la méthode getAllCategorieFirst");
-		assertEquals(new String("Ondes positives"), catService.getAllCategorie().get(0).getNomCategorie());
+		assertEquals(new String("Bonnes Ondes"), catService.getAllCategorie().get(0).getNomCategorie());
 
+	}
+	
+	// ============== TODO Test de gatCatByName
+		// Tester la correspondance des noms et descriptions
+	//@Ignore
+	@Test
+	public void testGetCatByName(){
+		
+		System.out.println("---------- Tester la méthode getCatByName");
+		assertEquals(new String("Happy"), catService.getCatByName("Bonnes Ondes").getDescription());
+		
 	}
 }

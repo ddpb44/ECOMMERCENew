@@ -30,10 +30,32 @@ public class CategorieDaoImpl implements ICategorieDao {
 	// Méthodes
 	// ============================================
 
+	/**
+	 * To get a "Categorie" with its name
+	 * 
+	 * @param name
+	 * the name of the "categorie" searched
+	 * 
+	 * @return the "categorie" searched in the database
+	 */
 	@Override
-	public Categorie getCategorieById(Categorie cat) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Categorie getCatByName(String name) {
+		// Recuperation de la session
+		Session s = sf.getCurrentSession();
+
+		// Le requete HQL
+		String req = "FROM Categorie cat WHERE cat.nomCategorie=:pNom";
+
+		// Creer un objet query
+		Query query = s.createQuery(req);
+
+		// Passage du param
+		query.setParameter("pNom", name);
+
+		Categorie cat_out = (Categorie) query.uniqueResult();
+
+		return cat_out;
+
 	}
 
 	@Override

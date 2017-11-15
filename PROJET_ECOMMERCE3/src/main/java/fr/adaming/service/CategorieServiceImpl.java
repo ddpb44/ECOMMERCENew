@@ -32,12 +32,6 @@ public class CategorieServiceImpl implements ICategorieService {
 	// ============================================
 
 	@Override
-	public Categorie getCategorieById(Categorie cat) throws Exception {
-		// TODO getCategorieById
-		return null;
-	}
-
-	@Override
 	public Categorie addCategorie(Categorie cat) {
 		// TODO addCategorie
 		return null;
@@ -64,6 +58,18 @@ public class CategorieServiceImpl implements ICategorieService {
 	public List<Categorie> getAllCategorie() {
 		// TODO getAllCategorie
 		return catDao.getAllCategorie();
+	}
+	/**
+	 * To get a "Categorie" with its name
+	 * 
+	 * @param name
+	 * the name of the "categorie" searched
+	 * 
+	 * @return the "categorie" searched in the database with DaoMethod
+	 */
+	@Override
+	public Categorie getCatByName(String name) {
+		return catDao.getCatByName(name);
 	}
 
 }
