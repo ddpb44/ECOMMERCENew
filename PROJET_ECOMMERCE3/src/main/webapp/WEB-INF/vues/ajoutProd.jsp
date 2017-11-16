@@ -68,7 +68,7 @@
 		<div class="form-group">
 			<form:label path="imageBytes" class="col-sm-2 control-label">imageBytes</form:label>
 			<div class="col-sm-10">
-				<form:input type="file" path="imageBytes" />
+				<input type="file" name="file" />
 				<form:errors path="imageBytes" class="col-sm-6"></form:errors>
 			</div>
 
