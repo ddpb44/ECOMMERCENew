@@ -28,6 +28,7 @@ public class ProduitServiceImpl implements IProduitService {
 		this.prodDao = prodDao;
 	}
 
+	
 	// ==================== 3 =====================
 	// Méthodes
 	// ============================================
