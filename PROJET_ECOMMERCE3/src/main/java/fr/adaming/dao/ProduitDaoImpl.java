@@ -42,7 +42,7 @@ public class ProduitDaoImpl implements IProduitDao {
 
 		Session s = sf.getCurrentSession();
 
-		String req = "select * from Produit p";
+		String req = "from Produit p";
 
 		Query query = s.createQuery(req);
 

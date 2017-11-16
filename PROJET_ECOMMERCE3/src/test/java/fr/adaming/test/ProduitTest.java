@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
@@ -21,6 +21,7 @@ import fr.adaming.service.IProduitService;
 public class ProduitTest {
 
 	// ==================injection des collaborateurs
+	@Autowired
 	private IProduitService prodService;
 
 	// setters pour l'injection
@@ -37,7 +38,7 @@ public class ProduitTest {
 
 		System.out.println("---------- Tester la méthode GetAllProduitTaille");
 		List<Produit> liste = prodService.getAllProduits();
-		assertEquals(1, liste.size());
+		assertEquals(2, liste.size());
 
 	}
 
@@ -48,7 +49,7 @@ public class ProduitTest {
 	public void testGetAllProduitFirst() {
 
 		System.out.println("---------- Tester la méthode GetAllProduitFirst");
-		assertEquals(new String("se dissout dans l'eau"), prodService.getAllProduits().get(0).getDesignation());
+		assertEquals(new String("rouge, à avaler"), prodService.getAllProduits().get(0).getDesignation());
 
 	}
 
@@ -62,7 +63,9 @@ public class ProduitTest {
 
 		System.out.println("---------- Tester la méthode getProdById");
 		Produit prod = new Produit();
-		assertEquals(new String("Cachet"), prodService.getProduitById(prod).getId_produit());
+		prod.setId_produit((long) 1);
+
+		assertEquals(new String("gelule"), prodService.getProduitById(prod).getDescription());
 
 	}
 
@@ -77,6 +80,8 @@ public class ProduitTest {
 		System.out.println("---------- Tester la méthode AddProd");
 
 		Produit prod = new Produit();
+		prod.setDescription("rouge");
+		prod.setDescription("gelule");
 		List<Produit> listeNew = prodService.getAllProduits();
 
 		prodService.addProduit(prod);
@@ -95,15 +100,14 @@ public class ProduitTest {
 		System.out.println("---------- Tester la méthode updateProd");
 
 		Produit prod = new Produit();
-
+		prod.setId_produit((long) 1);
+		prod = prodService.getProduitById(prod);
 		// modification du produit
-		prod.setDesignation("gelule");
-		prod.setDescription("a avaler");
-		
+		prod.setDesignation("sachet");
+
 		// comparaison de la nouvelle liste avec l'ancienne
-		assertEquals(new String ("gelule"), prodService.updateProduit(prod).getDesignation());
-		assertEquals(new String ("a avaler"), prodService.updateProduit(prod).getDescription());
-		
+		assertEquals(new String("sachet"), prodService.updateProduit(prod).getDesignation());
+
 	}
 
 	// ============================test methode
@@ -116,10 +120,13 @@ public class ProduitTest {
 		System.out.println("---------- Tester la méthode deletProd");
 
 		Produit prod = new Produit();
+		prod.setId_produit((long) 1);
+		prod = prodService.getProduitById(prod);
+		// recuperation de la liste avant suppression
 		List<Produit> listeNew = prodService.getAllProduits();
-		
+
 		prodService.deleteProduit(prod);
-		
+
 		assertEquals(listeNew.size() - 1, prodService.getAllProduits().size());
 	}
 
