@@ -9,6 +9,20 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-default" style="background-color: orange;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">HNB</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li role="presentation" class="active"><a
+					href="${pageContext.request.contextPath}/produit/afficheAjoutProd"
+					style="color: white">Ajouter produit</a></li>
+
+			</ul>
+		</div>
+	</nav>
+
 	<h1>${message}</h1>
 
 	<h2>LISTE DES Produits</h2>
@@ -16,6 +30,7 @@
 	<div align="center">
 		<table class="table table-striped">
 			<tr>
+				<th>Aperçu</th>
 				<th>ID Produit</th>
 				<th>Designation</th>
 				<th>Description</th>
@@ -23,13 +38,15 @@
 				<th>Quantite</th>
 
 			</tr>
-			<c:forEach var="prod" items="${listeProduits}">
+			<c:forEach var="prod" items="${listeProd}">
 				<tr>
+					<th>${prod.imageBytes}</th>
 					<th>${prod.id_produit}</th>
 					<th>${prod.designation}</th>
 					<th>${prod.description}</th>
 					<th>${prod.prix}</th>
 					<th>${prod.quantite}</th>
+
 				</tr>
 			</c:forEach>
 		</table>

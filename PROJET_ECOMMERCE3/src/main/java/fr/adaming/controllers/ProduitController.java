@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,5 +33,31 @@ public class ProduitController {
 		List<Produit> listeProd	 = prodService.getAllProduits();
 		
 		return new ModelAndView("adminProdPage", "listeProduits", listeProd);
+	}
+	
+	@RequestMapping(value = "/afficheAjoutProd", method = RequestMethod.GET)
+	// Méthode du formulaire ajouter
+	public ModelAndView afficheFormAjout() {
+
+		// ajout : identifiant de la page ajout.jsp
+		return new ModelAndView("ajoutProd", "prodAjout", new Produit());
+
+	}
+	
+	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
+	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit) {
+
+		// Appelle de la méthode service
+		Produit prodOut = prodService.addProduit(produit);
+
+		if (prodOut.getId_produit() != 0) {
+			// Actualiser la liste
+			List<Produit> liste = prodService.getAllProduits();
+			model.addAttribute("listeProduits", liste);
+
+			return "ImageTest";
+		} else {
+			return "redirect:afficheAjoutProd";
+		}
 	}
 }
