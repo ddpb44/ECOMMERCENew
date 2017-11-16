@@ -20,7 +20,7 @@
 	<h1 style="color: red; text-align: center">Formulaire d'ajout</h1>
 
 	<form:form class="form-horizontal" method="POST"
-		modelAttribute="prodAjout" action="insererProduit">
+		modelAttribute="prodAjout" action="insererProduit" enctype="multipart/form-data">
 		<div class="form-group">
 			<form:label path="designation" class="col-sm-2 control-label">Designation</form:label>
 			<div class="col-sm-10">

@@ -1,13 +1,18 @@
 package fr.adaming.controllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,7 +53,15 @@ public class ProduitController {
 	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
 	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, MultipartFile file) {
 
-	
+		try {
+			if (!file.isEmpty()) {
+				produit.setImageBytes(file.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		// Appelle de la méthode service
 		Produit prodOut = prodService.addProduit(produit);
 
@@ -57,9 +70,20 @@ public class ProduitController {
 			List<Produit> liste = prodService.getAllProduits();
 			model.addAttribute("listeProduits", liste);
 
-			return "ImageTest";
+			return "adminProdPage";
 		} else {
 			return "redirect:afficheAjoutProd";
 		}
+	}
+	
+	@RequestMapping(value = "/photoProd", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] getPhoto(Produit produit) throws IOException {
+		Produit	prod = prodService.getProduitById(produit);
+		if (prod.getImageBytes() == null)
+			return new byte[0];
+		else
+			return IOUtils
+					.toByteArray(new ByteArrayInputStream(prod.getImageBytes()));
 	}
 }

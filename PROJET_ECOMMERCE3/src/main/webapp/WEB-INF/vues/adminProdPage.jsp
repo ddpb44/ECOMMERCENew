@@ -40,7 +40,7 @@
 			</tr>
 			<c:forEach var="prod" items="${listeProd}">
 				<tr>
-					<th>${prod.imageBytes}</th>
+					<th><img alt="" src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}"></th>
 					<th>${prod.id_produit}</th>
 					<th>${prod.designation}</th>
 					<th>${prod.description}</th>
