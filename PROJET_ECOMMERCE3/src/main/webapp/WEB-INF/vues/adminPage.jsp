@@ -19,18 +19,20 @@
 
 	<h2>LISTE DES CATEGORIES</h2>
 
-	<div align="center">
+	<div class="tableCat" align="center">
 		<table class="table table-striped">
-			<tr>
+			<tr style="background-color: black">
 				<th>ID</th>
 				<th>Nom</th>
 				<th>Description</th>
+				<th>Opérations</th>
 			</tr>
 			<c:forEach var="cat" items="${listeCat}">
 				<tr>
 					<th>${cat.id_cat}</th>
 					<th>${cat.nomCategorie}</th>
 					<th>${cat.description}</th>
+					<th><a href="${pageContext.request.contextPath}/admin/supprimViaLien/${categorie.id_cat}">Supprimer</a> | <a href="${pageContext.request.contextPath}/admin/modifViaLien?pId=${categorie.id_cat}"> Modifier </a></th>
 				</tr>
 			</c:forEach>
 		</table>
