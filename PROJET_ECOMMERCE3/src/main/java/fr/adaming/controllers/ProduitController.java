@@ -48,7 +48,7 @@ public class ProduitController {
 	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
 	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, MultipartFile file) {
 
-		
+	
 		// Appelle de la méthode service
 		Produit prodOut = prodService.addProduit(produit);
 
