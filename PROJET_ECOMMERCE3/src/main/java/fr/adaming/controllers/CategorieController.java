@@ -2,7 +2,12 @@ package fr.adaming.controllers;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,12 +31,19 @@ public class CategorieController {
 	@Autowired
 	private ICategorieService catService;
 
+	@Autowired
+	private JavaMailSender mailSender;
+
 	// ===========================================
 	// Setter pour le Service
 	// ===========================================
 
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
+	}
+
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
 	}
 
 	// //Affichr le formulaire de modification
@@ -91,21 +103,41 @@ public class CategorieController {
 		return "adminPage";
 	}
 
-	// Faire l'ajout
 	@RequestMapping(value = "principal/ajouterCat", method = RequestMethod.POST)
-	public String ajoutCat(Model model, @ModelAttribute("catAddForm") Categorie cat, RedirectAttributes red) {
+	public String ajoutCat(Model model, @ModelAttribute("catAddForm") Categorie cat) {
 
-		Categorie cOut = catService.addCategorie(cat);
-		if (cOut != null) {
+		catService.addCategorie(cat);
 
-			List<Categorie> listeCategories = catService.getAllCategorie();
-			model.addAttribute("listeCat", listeCategories);
-			return "adminPage";
+//		// Essai envoi de mail
+//		String status = null;
+//		String email = "kikky.gingerchi@hotmail.fr";
+//
+//		try {
+//
+		List<Categorie> listeCategories = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategories);
+		model.addAttribute("catAddForm", new Categorie());
+//
+//			MimeMessage message = mailSender.createMimeMessage();
+//			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+//			helper.setFrom("Administrator");
+//			helper.setTo(email);
+//			helper.setSubject("Confirmation de l'ajout d'une catégorie");
+//
+//			String text = "Catégorie :<br />" + "Nom:<b>" + cat.getNomCategorie() + "</b><br />" + "Description:<b>"
+//					+ cat.getDescription() + "</b>";
+//
+//			helper.setText(text, true);
+//			mailSender.send(message);
+//			status = "Confirmation email is sent to your address (" + email + ")";
+//		} catch (MessagingException e) {
+//			status = "There was an error in email sending. Please check your email address: " + email;
+//		}
+//
+//		model.addAttribute("message", status);
+		return "adminPage";
 
-		} else {
-			red.addFlashAttribute("message", "La categorie n'a pas pu être ajoutée");
-			return "adminPage";
-		}
+		
 
 	}
 

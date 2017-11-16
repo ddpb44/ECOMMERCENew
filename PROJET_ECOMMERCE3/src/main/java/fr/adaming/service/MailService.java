@@ -9,7 +9,7 @@ public class MailService {
 
 	private MailSender conceptMail;
 
-	public void conceptReadyToSendEmail(String toAddress, String fromAddress, String subject, String msgBody) {
+	public void conceptReadyToSendEmail(String[] toAddress, String fromAddress, String subject, String msgBody) {
 
 		fromAddress = "conceptStore@gmail.com";
 		SimpleMailMessage conceptMsg = new SimpleMailMessage();

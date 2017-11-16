@@ -22,16 +22,17 @@
 </head>
 <body>
 
-	<h2 align="left" style="position: absolute; left: 5%">LISTE DES CATEGORIES</h2>
+	<h2 align="left" style="position: absolute; left: 5%">LISTE DES
+		CATEGORIES</h2>
 	<button type="button" data-toggle="modal" data-target="#Ajout"
-		style="position: absolute; width: 15%; left: 15%; top: 10%" class="btn btn-primary">AJOUTER
-		UNE CATEGORIE</button>
+		style="position: absolute; width: 15%; left: 15%; top: 10%"
+		class="btn btn-primary">AJOUTER UNE CATEGORIE</button>
 
 	<input class="form-control" id="myInput" type="text"
 		placeholder="Rechercher">
 	<div class="tableCat" align="center"
 		style="position: absolute; top: 15%">
-		<table  class="table table-hover ">
+		<table class="table table-hover ">
 			<thead>
 				<tr class="header">
 					<th>ID</th>
@@ -101,5 +102,6 @@
 
 		</div>
 	</div>
+
 </body>
 </html>
