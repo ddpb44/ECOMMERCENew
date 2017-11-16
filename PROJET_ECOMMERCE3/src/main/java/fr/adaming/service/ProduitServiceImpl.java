@@ -53,8 +53,7 @@ public class ProduitServiceImpl implements IProduitService {
 	}
 
 	@Override
-	public Produit addProduit(Produit produit, Categorie categorie) {
-		produit.setCat(categorie);
+	public Produit addProduit(Produit produit) {
 		return prodDao.addProduit(produit);
 	}
 
