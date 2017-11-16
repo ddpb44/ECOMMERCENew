@@ -15,19 +15,42 @@ import fr.adaming.model.Produit;
 @Transactional
 public class ProduitServiceImpl implements IProduitService {
 
+	// ==================== 1 =====================
+	// Injection des collaborateurs
+	// ============================================
 	@Autowired
 	IProduitDao prodDao;
 
+	// ==================== 2 =====================
+	// Setters pour l'injection
+	// ============================================
 	public void setProdDao(IProduitDao prodDao) {
 		this.prodDao = prodDao;
 	}
 
+	// ==================== 3 =====================
+	// Méthodes
+	// ============================================
+	
+	/**
+	 * Service method to get the list of all Produits
+	 * 
+	 * @return A list of all Produits recovered from Dao method
+	 */
 	@Override
 	public List<Produit> getAllProduits() {
 		// TODO Auto-generated method stub
 		return prodDao.getAllProduits();
 	}
 
+	/**
+	 * To get a "Produit" with its id
+	 * 
+	 * @param produit
+	 *            the produit searched
+	 * 
+	 * @return the "produit" searched in the database with DaoMethod
+	 */
 	@Override
 	public Produit getProduitById(Produit produit) {
 		Produit prodOut = prodDao.getProduitById(produit);
@@ -39,7 +62,15 @@ public class ProduitServiceImpl implements IProduitService {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * To get a "Produit" with its designation
+	 * 
+	 * @param produit
+	 *            the produit searched
+	 * 
+	 * @return the "produit" searched in the database with DaoMethod
+	 */
 	@Override
 	public Produit getProduitByDes(Produit produit) {
 		Produit prodOut = prodDao.getProduitByDes(produit);
@@ -52,11 +83,27 @@ public class ProduitServiceImpl implements IProduitService {
 		return null;
 	}
 
+	/**
+	 * Service method to add a Produit to the existing list of Produits
+	 * 
+	 * @param produit
+	 *            the produit to add
+	 * 
+	 * @return The added Produit recovered from Dao method
+	 */
 	@Override
 	public Produit addProduit(Produit produit) {
 		return prodDao.addProduit(produit);
 	}
 
+	/**
+	 * Service method to update a Produit and modify the list of Produits
+	 * 
+	 * @param produit
+	 *            the produit to update
+	 * 
+	 * @return The updated Produit recovered from Dao method
+	 */
 	@Override
 	public Produit updateProduit(Produit produit) {
 
@@ -69,6 +116,14 @@ public class ProduitServiceImpl implements IProduitService {
 		return null;
 	}
 
+	/**
+	 * Service method to delete a Produit from the existing list of Produits
+	 * 
+	 * @param produit
+	 *            the produit to delete
+	 * 
+	 * @return The deleted Produit recovered from Dao method
+	 */
 	@Override
 	public int deleteProduit(Produit produit) {
 		return prodDao.deleteProduit(produit);
