@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,29 +13,93 @@
 	rel="stylesheet" />
 <link href='<c:url value="/resources/css/style.css"></c:url>'
 	rel="stylesheet" />
+<script type="text/javascript"
+	src='<c:url value="/resources/js/jquery-3.2.1.js"></c:url>'></script>
+<script type="text/javascript"
+	src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
+<script type="text/javascript"
+	src='<c:url value="/resources/js/java.js"></c:url>'></script>
 </head>
 <body>
 
 	<h2 align="center">LISTE DES CATEGORIES</h2>
+	<button type="button" data-toggle="modal" data-target="#Ajout"
+		style="color: blue; position: absolute; width: 15%; left: 42.5%">AJOUTER
+		UNE CATEGORIE</button>
 
-	<div class="tableCat" align="center">
-		<table class="table table-striped">
-			<tr style="background-color: black">
-				<th>ID</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Opérations</th>
-			</tr>
-			<c:forEach var="cat" items="${listeCat}">
-				<tr>
-					<th>${cat.id_cat}</th>
-					<th>${cat.nomCategorie}</th>
-					<th>${cat.description}</th>
-					<th><a href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a> | <a href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}"> Modifier </a></th>
+	<input class="form-control" id="myInput" type="text"
+		placeholder="Rechercher">
+	<div class="tableCat" align="center"
+		style="position: absolute; top: 15%">
+		<table  class="table table-hover table-striped table-bordered">
+			<thead>
+				<tr style="background-color: black">
+					<th>ID</th>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Opérations</th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody id="myTable">
+				<c:forEach var="cat" items="${listeCat}">
+					<tr style="background-color: gold; color: purple">
+						<th>${cat.id_cat}</th>
+						<th>${cat.nomCategorie}</th>
+						<th>${cat.description}</th>
+						<th><a
+							href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a>
+							| <a
+							href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}">
+								Modifier </a></th>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 
+	<div id="Ajout" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Ajout d'une catégorie</h4>
+				</div>
+				<div class="modal-body">
+					<f:form class="form-horizontal" method="POST"
+						modelAttribute="catAddForm" action="ajouterCat">
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="cat_name">Nom:</label>
+							<div class="col-sm-10">
+								<f:input path="nomCategorie" class="form-control" id="cat_name" />
+								<f:errors path="nomCategorie" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="cat_description">Description:</label>
+							<div class="col-sm-10">
+								<f:input path="description" class="form-control"
+									id="cat_description" />
+								<f:errors path="description" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-warning">AJOUTER</button>
+							</div>
+						</div>
+					</f:form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </body>
 </html>
