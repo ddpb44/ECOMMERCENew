@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -23,7 +26,7 @@ public class AdminController {
 	// ===========================================
 	@Autowired
 	private ICategorieService catService;
-	
+
 	@Autowired
 	private IProduitService prodService;
 
@@ -34,24 +37,22 @@ public class AdminController {
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
 	}
-	
+
 	public void setProdService(IProduitService prodService) {
 		this.prodService = prodService;
 	}
-
 
 	// ===========================================
 	// PostConstruct
 	// ===========================================
 
-
-	
 	// ===========================================
 	// Méthodes
 	// ===========================================
-	
+
 	/**
 	 * Show the website welcome file
+	 * 
 	 * @return The website welcome file
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -62,8 +63,9 @@ public class AdminController {
 
 	/**
 	 * Redirect to the main admin page and show the Categorie list
-	 * @param modele 
-	 * 				Contains the page attributes
+	 * 
+	 * @param modele
+	 *            Contains the page attributes
 	 * @return The main admin page
 	 */
 	@RequestMapping(value = "principal/pageAdmin", method = RequestMethod.GET)
@@ -71,11 +73,9 @@ public class AdminController {
 
 		// Récupérer la liste des catégories
 		List<Categorie> listeCategories = catService.getAllCategorie();
-		
+
 		List<Produit> listeProduits = prodService.getAllProduits();
-		
-		modele.addAttribute("message", "Bonjour M.admin !! Vous êtes dans votre page ADMIN");
-		
+
 		modele.addAttribute("listeCat", listeCategories);
 		modele.addAttribute("listeProd", listeProduits);
 
@@ -84,9 +84,16 @@ public class AdminController {
 
 	@RequestMapping(value = "produits/pageAdminProduits", method = RequestMethod.GET)
 	public String affichePageAdminProd(ModelMap modele) {
-
-		modele.addAttribute("message", "Bonjour M.admin !! Vous êtes dans votre page ADMIN");
+		
+		// Récupérer la liste des catégories
+		List<Categorie> listeCategories = catService.getAllCategorie();
+		List<Produit> listeProduits = prodService.getAllProduits();
+		
+		modele.addAttribute("listeCat", listeCategories);
+		modele.addAttribute("listeProd", listeProduits);
 
 		return "adminProdPage";
 	}
+
+		
 }

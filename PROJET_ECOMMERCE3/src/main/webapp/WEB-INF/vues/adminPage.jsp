@@ -15,9 +15,7 @@
 </head>
 <body>
 
-	<h1>${message}</h1>
-
-	<h2>LISTE DES CATEGORIES</h2>
+	<h2 align="center">LISTE DES CATEGORIES</h2>
 
 	<div class="tableCat" align="center">
 		<table class="table table-striped">
@@ -32,7 +30,7 @@
 					<th>${cat.id_cat}</th>
 					<th>${cat.nomCategorie}</th>
 					<th>${cat.description}</th>
-					<th><a href="${pageContext.request.contextPath}/admin/supprimViaLien/${categorie.id_cat}">Supprimer</a> | <a href="${pageContext.request.contextPath}/admin/modifViaLien?pId=${categorie.id_cat}"> Modifier </a></th>
+					<th><a href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a> | <a href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}"> Modifier </a></th>
 				</tr>
 			</c:forEach>
 		</table>
