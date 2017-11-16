@@ -22,18 +22,18 @@
 </head>
 <body>
 
-	<h2 align="center">LISTE DES CATEGORIES</h2>
+	<h2 align="left" style="position: absolute; left: 5%">LISTE DES CATEGORIES</h2>
 	<button type="button" data-toggle="modal" data-target="#Ajout"
-		style="color: blue; position: absolute; width: 15%; left: 42.5%">AJOUTER
+		style="position: absolute; width: 15%; left: 15%; top: 10%" class="btn btn-primary">AJOUTER
 		UNE CATEGORIE</button>
 
 	<input class="form-control" id="myInput" type="text"
 		placeholder="Rechercher">
 	<div class="tableCat" align="center"
 		style="position: absolute; top: 15%">
-		<table  class="table table-hover table-striped table-bordered">
+		<table  class="table table-hover ">
 			<thead>
-				<tr style="background-color: black">
+				<tr class="header">
 					<th>ID</th>
 					<th>Nom</th>
 					<th>Description</th>
@@ -42,13 +42,13 @@
 			</thead>
 			<tbody id="myTable">
 				<c:forEach var="cat" items="${listeCat}">
-					<tr style="background-color: gold; color: purple">
+					<tr class="bodyTable">
 						<th>${cat.id_cat}</th>
 						<th>${cat.nomCategorie}</th>
 						<th>${cat.description}</th>
-						<th><a
+						<th><a style="color: gold"
 							href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a>
-							| <a
+							| <a style="color: gold"
 							href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}">
 								Modifier </a></th>
 					</tr>
@@ -73,7 +73,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="cat_name">Nom:</label>
 							<div class="col-sm-10">
-								<f:input path="nomCategorie" class="form-control" id="cat_name" />
+								<f:input path="nomCategorie" class="form-input" id="cat_name" />
 								<f:errors path="nomCategorie" cssStyle="color:red" />
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="cat_description">Description:</label>
 							<div class="col-sm-10">
-								<f:input path="description" class="form-control"
+								<f:input path="description" class="form-input"
 									id="cat_description" />
 								<f:errors path="description" cssStyle="color:red" />
 							</div>
