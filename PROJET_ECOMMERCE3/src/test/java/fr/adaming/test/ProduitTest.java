@@ -52,17 +52,6 @@ public class ProduitTest {
 
 	}
 
-	// Tester la correspondance des noms et descriptions
-
-	@Test
-	@Rollback
-	public void testGetProdByDes() {
-
-		System.out.println("---------- Tester la méthode getProdByDes");
-		assertEquals(new String("Cachet"), prodService.getProdByDes("se dissout dans l'eau").getDesignation());
-
-	}
-
 	// ==========================================test methode
 	// getProduitsById=================================//
 
