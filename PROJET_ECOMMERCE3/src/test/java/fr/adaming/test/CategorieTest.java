@@ -92,6 +92,7 @@ public class CategorieTest {
 	 */
 	// ============== TODO Test de addCategorie
 	// Tester la taille de la liste
+	@Ignore
 	@Test
 	@Rollback
 	public void testAddCategorieTaille() {
@@ -112,6 +113,7 @@ public class CategorieTest {
 	 * 
 	 */
 	// Tester la correspondance des noms et descriptions
+	@Ignore
 	@Test
 	@Rollback
 	public void testAddCategorieDescription() {
@@ -131,6 +133,7 @@ public class CategorieTest {
 	 */
 	// ============== TODO Test de deleteCategorieTaille
 	// Tester la taille de la liste
+	@Ignore
 	@Test
 	@Rollback
 	public void testDeleteCategorieTaille() {
@@ -149,6 +152,7 @@ public class CategorieTest {
 	 */
 	// ============== TODO Test de updateCategorieTaille
 	// Tester la taille de la liste
+	@Ignore
 	@Test
 	@Rollback
 	public void testUpdateCategorieTaille() {
@@ -166,6 +170,7 @@ public class CategorieTest {
 	 * 
 	 */
 	// Tester le nouveau nom de la Categorie
+	@Ignore
 	@Test
 	@Rollback
 	public void testUpdateCategorieNom() {
