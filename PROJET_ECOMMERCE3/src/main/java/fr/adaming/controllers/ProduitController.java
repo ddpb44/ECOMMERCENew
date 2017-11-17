@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @Controller
@@ -27,6 +29,9 @@ public class ProduitController {
 	// service========================//
 	@Autowired
 	IProduitService prodService;
+
+	@Autowired
+	ICategorieService catService;
 
 	public void setProdService(IProduitService prodService) {
 		this.prodService = prodService;
@@ -43,7 +48,10 @@ public class ProduitController {
 
 	@RequestMapping(value = "/afficheAjoutProd", method = RequestMethod.GET)
 	// Méthode du formulaire ajouter
-	public ModelAndView afficheFormAjout() {
+	public ModelAndView afficheFormAjout(Model model) {
+
+		List<Categorie> listeCategorie = catService.getAllCategorie();
+		model.addAttribute("categoriesListe", listeCategorie);
 
 		// ajout : identifiant de la page ajout.jsp
 		return new ModelAndView("ajoutProd", "prodAjout", new Produit());
@@ -51,7 +59,8 @@ public class ProduitController {
 	}
 
 	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
-	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, MultipartFile file) {
+	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, String cat,
+			MultipartFile file) {
 
 		try {
 			if (!file.isEmpty()) {
@@ -62,6 +71,9 @@ public class ProduitController {
 			e.printStackTrace();
 		}
 
+		Categorie categorie = catService.getCatByName(cat);
+		produit.setCat(categorie);
+		
 		// Appelle de la méthode service
 		Produit prodOut = prodService.addProduit(produit);
 
@@ -75,15 +87,14 @@ public class ProduitController {
 			return "redirect:afficheAjoutProd";
 		}
 	}
-	
+
 	@RequestMapping(value = "/photoProd", produces = MediaType.IMAGE_JPEG_VALUE)
 	@ResponseBody
 	public byte[] getPhoto(Produit produit) throws IOException {
-		Produit	prod = prodService.getProduitById(produit);
+		Produit prod = prodService.getProduitById(produit);
 		if (prod.getImageBytes() == null)
 			return new byte[0];
 		else
-			return IOUtils
-					.toByteArray(new ByteArrayInputStream(prod.getImageBytes()));
+			return IOUtils.toByteArray(new ByteArrayInputStream(prod.getImageBytes()));
 	}
 }
