@@ -147,4 +147,20 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return listeCategorie;
 	}
 
+	/**
+	 * To get a "Categorie" with its id
+	 * 
+	 * @param name
+	 *            the id of the "categorie" searched
+	 * 
+	 * @return the "categorie" searched in the database
+	 */
+	@Override
+	public Categorie getCatById(int id) {
+		// TODO getCatById
+		Session hbs = sf.getCurrentSession();
+		
+		return (Categorie) hbs.get(Categorie.class, id);
+	}
+
 }

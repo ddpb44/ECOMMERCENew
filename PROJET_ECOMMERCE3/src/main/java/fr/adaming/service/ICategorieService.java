@@ -9,6 +9,9 @@ public interface ICategorieService {
 	// TODO getCategorieByName
 	public Categorie getCatByName(String name);
 
+	// TODO getCategorieById
+	public Categorie getCatById(int id);
+
 	// TODO addCategorie
 	public Categorie addCategorie(Categorie cat);
 

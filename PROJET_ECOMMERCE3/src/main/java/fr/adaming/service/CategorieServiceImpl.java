@@ -88,4 +88,17 @@ public class CategorieServiceImpl implements ICategorieService {
 		return catDao.getCatByName(name);
 	}
 
+	/**
+	 * To get a "Categorie" with its id
+	 * 
+	 * @param name
+	 *            the id of the "categorie" searched
+	 * 
+	 * @return the "categorie" searched in the database with DaoMethod
+	 */
+	@Override
+	public Categorie getCatById(int id) {
+		return catDao.getCatById(id);
+	}
+
 }
