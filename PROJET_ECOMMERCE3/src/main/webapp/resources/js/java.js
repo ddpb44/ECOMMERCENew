@@ -5,4 +5,11 @@ $(document).ready(function(){
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+  
+  $("#myInputPro").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTableProd tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
 });

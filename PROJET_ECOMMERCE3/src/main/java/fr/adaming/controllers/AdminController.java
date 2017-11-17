@@ -101,6 +101,7 @@ public class AdminController {
 		modele.addAttribute("listeCat", listeCategories);
 		modele.addAttribute("listeProd", listeProduits);
 		modele.addAttribute("catAddForm", new Categorie());
+		modele.addAttribute("proAddForm", new Produit());
 
 		return "adminPage";
 	}
