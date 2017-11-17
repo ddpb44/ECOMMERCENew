@@ -6,21 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href='<c:url value="/resources/css/bootstrap.css"></c:url>'
+	rel="stylesheet" />
+<link href='<c:url value="/resources/css/bootstrap-theme.css"></c:url>'
+	rel="stylesheet" />
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+	<link href='<c:url value="/resources/css/styleFich.css"></c:url>'
+	rel="stylesheet" />
+<script type="text/javascript"
+	src='<c:url value="/resources/js/jquery-3.2.1.js"></c:url>'></script>
+<script type="text/javascript"
+	src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
+<script type="text/javascript"
+	src='<c:url value="/resources/js/java.js"></c:url>'></script>
 
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-<spring:url value="/resources/css/PDF.css" var="pdfCss" />
-<spring:url value="/resources/js/testPdf.js" var="testPdfJs" />
-
-<link href="${pdfCss}" rel="stylesheet" />
-<script src="${testPdfJs}"></script>
-
+	src='<c:url value="/resources/js/scriptFich.js"></c:url>'></script>
 <title>AdminProdPage</title>
 </head>
 <body>
@@ -82,38 +84,7 @@
 				</div>
 			</div>
 
-			<script>
-				$(document)
-						.ready(
-								function() {
-									$("#btnPrint")
-											.on(
-													"click",
-													function() {
-														var conceptStore = $(
-																"#dvContainer")
-																.html();
-														//ouverture du document
-														var printWindow = window
-																.open(
-																		'<link rel="stylesheet" href="/resources/css/pdf.css">',
-																		'_blank',
-																		'height=400,width=800');
-														//ecrire le html dans la nouvelle fenêtre
-														printWindow.document
-																.write('<html><head><title>ConceptStore</title>');
-														printWindow.document
-																.write('</head><body>');
-														printWindow.document
-																.write(conceptStore);
-														printWindow.document
-																.write('</body></html>');
-														printWindow.document
-																.close();
-														printWindow.print();
-													});
-								});
-			</script>
+		
 		</div>
 		<input type="button" value="Enregistrer facture" id="btnPrint"
 			style="position: absolute; width: 20%; left: 40%" />
