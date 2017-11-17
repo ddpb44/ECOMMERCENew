@@ -20,7 +20,7 @@
 	<h1 style="color: red; text-align: center">Formulaire d'ajout</h1>
 
 	<form:form class="form-horizontal" method="POST"
-		modelAttribute="prodAjout" action="insererProduit"
+		modelAttribute="prodAjout" action="insererProduit?pNomCategorie=${produit.cat.nomCategorie}"
 		enctype="multipart/form-data">
 		<div class="form-group">
 			<form:label path="designation" class="col-sm-2 control-label">Designation</form:label>
@@ -58,18 +58,17 @@
 
 		</div>
 
+
+
 		<div class="form-group">
-			<form:label path="cat" class="col-sm-2 control-label">Categorie</form:label>
+			<label class="col-sm-2 control-label">Categorie</label>
 			<div class="col-sm-10">
-				<form:select path="cat" >
-					<c:forEach items="${categoriesListe}" var="cat">
-						<form:option value="${cat}">${cat.nomCategorie}</form:option>
-						<form:errors path="cat" class="col-sm-6"></form:errors>
-					</c:forEach>
+				<form:select path="cat.nomCategorie">
+					<form:options items="${categoriesListe}"
+						itemLabel="nomCategorie" itemValue="nomCategorie" />
 				</form:select>
 			</div>
 		</div>
-
 
 		<div class="form-group">
 			<form:label path="imageBytes" class="col-sm-2 control-label">imageBytes</form:label>
