@@ -156,7 +156,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	 * @return the "categorie" searched in the database
 	 */
 	@Override
-	public Categorie getCatById(int id) {
+	public Categorie getCatById(Long id) {
 		// TODO getCatById
 		Session hbs = sf.getCurrentSession();
 		

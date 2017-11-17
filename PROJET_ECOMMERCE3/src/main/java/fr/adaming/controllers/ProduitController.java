@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,8 +61,7 @@ public class ProduitController {
 	}
 
 	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
-	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit,
-			@RequestParam("pNomCategorie") String nomCategorie, MultipartFile file) {
+	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, MultipartFile file) {
 
 		try {
 			if (!file.isEmpty()) {
@@ -72,7 +72,11 @@ public class ProduitController {
 			e.printStackTrace();
 		}
 
-		Categorie categorie = catService.getCatByName(nomCategorie);
+		long id_cat = produit.getCat().getId_cat();
+		
+		System.out.println(id_cat);
+		
+		Categorie categorie = catService.getCatById(id_cat);
 		produit.setCat(categorie);
 
 		System.out.println(produit.getCat());

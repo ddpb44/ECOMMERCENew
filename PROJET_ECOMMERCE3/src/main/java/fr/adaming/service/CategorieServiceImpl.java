@@ -97,7 +97,7 @@ public class CategorieServiceImpl implements ICategorieService {
 	 * @return the "categorie" searched in the database with DaoMethod
 	 */
 	@Override
-	public Categorie getCatById(int id) {
+	public Categorie getCatById(Long id) {
 		return catDao.getCatById(id);
 	}
 

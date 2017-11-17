@@ -10,7 +10,7 @@ public interface ICategorieDao {
 	public Categorie getCatByName(String name);
 
 	// TODO getCategorieById
-	public Categorie getCatById(int id);
+	public Categorie getCatById(Long id);
 
 	// TODO addCategorie
 	public Categorie addCategorie(Categorie cat);
