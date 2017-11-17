@@ -24,3 +24,8 @@
 .table > tbody > tr > .highrow {
     border-top: 3px solid;
 }
+
+.text-center{
+	text-align: center;
+	
+}

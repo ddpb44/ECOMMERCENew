@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 	$("#btnPrint").on("click", function() {
 		var conceptStore = $("#dvContainer").html();
 		var printWindow = window.open('', '', 'height=400,width=800');

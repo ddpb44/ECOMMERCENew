@@ -19,10 +19,13 @@
 	<!-- Forcer le controller façade à intercepter les requêtes -->
 	<mvc:default-servlet-handler />
 
+	<!-- localiser les fichiers -->
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="31556926" />
 	<!-- ============================================= -->
 	<!-- Déclaration du Bean ViewResolver -->
 	<!-- ============================================= -->
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
@@ -30,10 +33,12 @@
 		<property name="suffix" value=".jsp" />
 
 	</bean>
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="100000" />
-	
 	</bean>
+
+
 
 </beans>
