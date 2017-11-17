@@ -9,44 +9,42 @@ body {
 	height: 100%;
 }
 
-.tableCat {
 	width: 40%;
 	position: absolute;
 	left: 5%;
+	
 }
-
-.tablePro {
-	width: 40%;
-	position: absolute;
-	right: 7%;
-}
-
-.form-control {
-	position: absolute;
+	
+.form-control{
+	
+	position:absolute;
 	width: 10%;
 	left: 5%;
 	top: 10%;
+	
+	
 }
 
-.formprod {
-	position: absolute;
-	width: 10%;
-	right: 7%;
-	top: 10%;
-}
-
-.form-input {
+.form-input{
+	
 	width: 60%;
+	
+	
 }
 
-.header {
-	background-color: transparent;
-	text-align: left;
-	color: white;
-	font-size: 20px;
+.header{
+	
+background-color: transparent; 
+text-align: left; 
+color: white;
+font-size: 20px;
+ 
 }
 
-.bodyTable {
-	background: rgba(133, 136, 147, 0.7);
-	color: gold;
+.bodyTable{
+	
+
+background: rgba(133, 136, 147, 0.7);
+color: gold;
+
 }
