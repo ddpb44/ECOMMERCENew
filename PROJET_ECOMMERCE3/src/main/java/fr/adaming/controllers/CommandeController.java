@@ -22,4 +22,16 @@ public class CommandeController {
 	private IClientService clientService;
 
 	// ===================== setter==========================================//
+	
+	public void setCommandeService(ICommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	
+	
+	
 }
