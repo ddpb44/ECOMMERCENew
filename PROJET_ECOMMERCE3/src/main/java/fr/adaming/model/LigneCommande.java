@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,9 @@ public class LigneCommande implements Serializable {
 	@Transient
 	private double prix2;
 
+	@Column(name = "valide_lc")
+	private String valide = "En attente";
+	
 	// Associations UML --> JAVA
 	@ManyToOne
 	@JoinColumn(name = "produit_id", referencedColumnName = "id_produit")
@@ -35,6 +39,7 @@ public class LigneCommande implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "commande_id", referencedColumnName = "id_commande")
 	private Commande attCommande;
+
 
 	// Constructeur vide
 	public LigneCommande() {
@@ -90,11 +95,22 @@ public class LigneCommande implements Serializable {
 		this.prix2 = prix2;
 	}
 
-	// Méthode toString()
+	
+	public String getValide() {
+		return valide;
+	}
+
+	public void setValide(String valide) {
+		this.valide = valide;
+	}
+
 	@Override
 	public String toString() {
-		return "LigneCommande [id_lc=" + id_lc + ", quantite=" + quantite + ", prix=" + prix + ", attProduit="
-				+ attProduit + ", attCommande=" + attCommande + "]";
+		return "LigneCommande [id_lc=" + id_lc + ", quantite=" + quantite + ", prix=" + prix + ", prix2=" + prix2
+				+ ", valide=" + valide + ", attProduit=" + attProduit + ", attCommande=" + attCommande + "]";
 	}
+
+	// Méthode toString()
+	
 
 }
