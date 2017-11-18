@@ -17,6 +17,8 @@ public class CommandeController {
 	@Autowired
 	private ICommandeService commandeService;
 
-	
+	@Autowired
+	private IClientService clientService;
+
 	// ===================== setter==========================================//
 }

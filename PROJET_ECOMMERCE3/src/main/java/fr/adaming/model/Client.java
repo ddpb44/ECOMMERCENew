@@ -30,6 +30,8 @@ public class Client implements Serializable {
 	
 	private String tel;
 	
+	private String mdpClient;
+	
 	
 	// Association UML --> JAVA
 	@OneToMany(mappedBy="attClient", fetch=FetchType.LAZY)
@@ -103,11 +105,20 @@ public class Client implements Serializable {
 	}
 
 
+	public String getMdpClient() {
+		return mdpClient;
+	}
+
+
+	public void setMdpClient(String mdpClient) {
+		this.mdpClient = mdpClient;
+	}
+
 	// Méthode toString()
 	@Override
 	public String toString() {
 		return "Client [id_client=" + id_client + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email="
-				+ email + ", tel=" + tel + ", listeCommande=" + listeCommande + "]";
+				+ email + ", tel=" + tel + ", mdpClient=" + mdpClient + ", listeCommande=" + listeCommande + "]";
 	}
 	
 	
