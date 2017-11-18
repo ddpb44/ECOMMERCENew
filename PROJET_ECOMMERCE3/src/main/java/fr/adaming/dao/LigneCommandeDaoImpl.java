@@ -42,13 +42,13 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession(); 
 
 		// La requete HQL
-		String req = "FROM LigneCommande lc WHERE lc.attCommande.client.id=:pIdcl";
+		String req = "FROM LigneCommande lc WHERE lc.attCommande.client.id_client=:pIdcl";
 		
 		// creation d'un objet query
 		Query query = s.createQuery(req); // recuperation du query de la session
 
 		// passage des paramètres
-		query.setParameter("pIdcl", c.getId_client());
+		query.setParameter("pIdcl",c.getId_client());
 
 		// envoyer la requete et recuperation du resultat
 		List<LigneCommande> liste = query.list();
@@ -72,7 +72,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 
 		// La requete HQL
-		String req = "FROM LigneCommande lc WHERE lc.valide=:pValide_lc AND lc.attCommande.client.id=:pIdcl ";
+		String req = "FROM LigneCommande lc WHERE lc.valide=:pValide_lc AND lc.attCommande.client.id_client=:pIdcl";
 		
 		// creation d'un objet query
 		Query query = s.createQuery(req);
@@ -156,7 +156,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 
 		// requete HQL
-		String req = " UPDATE LigneCommande lc SET lc.quantite=:pQuantite,lc.prix=:pPrix,lc.valide=:pValide WHERE lc.id_lc=:pIdlc AND lc.attCommande.id_com=:pIdco";
+		String req = " UPDATE LigneCommande lc SET lc.quantite=:pQuantite,lc.prix=:pPrix,lc.valide=:pValide WHERE lc.id_lc=:pIdlc AND lc.attCommande.id_commande=:pIdco";
 
 		// creation d'un objet query
 		Query query = s.createQuery(req);

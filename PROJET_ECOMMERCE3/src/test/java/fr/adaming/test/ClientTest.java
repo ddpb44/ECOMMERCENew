@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.List;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -39,9 +42,10 @@ public class ClientTest {
 		System.out.println("---------- Tester la méthode GetClientByName");
 		
 		Client cl=new Client();
-		cl.setNomClient("rourou");
-		
-		assertEquals(new String("rourou"), clientService.isExist(cl).getNomClient());
+		cl.setEmail("c@c");
+		List<Client> liste=clientService.getAllClients();
+		clientService.isExist(cl);
+		assertEquals(liste.size(), clientService.getAllClients().size());
 
 
 	}

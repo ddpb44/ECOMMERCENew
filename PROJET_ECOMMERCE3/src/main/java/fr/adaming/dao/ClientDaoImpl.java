@@ -42,7 +42,7 @@ public class ClientDaoImpl implements IClientDao {
 		Query query = s.createQuery(req);
 
 		// passage des parametres
-		query.setParameter("pMail", cl.getEmail());
+		query.setParameter("pEmail", cl.getEmail());
 		query.setParameter("pMdp", cl.getMdpClient());
 
 		// envoyer la requete et recuperation du resultat

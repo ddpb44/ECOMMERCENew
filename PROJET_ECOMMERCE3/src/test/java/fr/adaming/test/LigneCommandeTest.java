@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,6 +25,7 @@ public class LigneCommandeTest {
 
 	// =========================Injection des
 	// collaborateurs===============================//
+	@Autowired
 	private ILigneCommandeService ligneCommandeService;
 
 	// Setter pour l'injection
@@ -33,12 +35,22 @@ public class LigneCommandeTest {
 
 	// =================================Test methode GetAllLigneCommande
 	// ======================================//
-	@Ignore
+
 	@Test
 	@Rollback
 	public void testGetAllLigneCommande() {
+		
 		System.out.println("-----------------tester la methode  GetAllLigneCommande");
+		
 		Client cl = new Client();
+		cl.setId_client((long) 2);
+		cl.setAdresse("rue du nuage");
+		cl.setEmail("g@g");
+		cl.setNomClient("loulou");
+		cl.setTel("0125896347");
+		cl.setMdpClient("g");
+		
+		
 		List<LigneCommande> liste = ligneCommandeService.GetAllLigneCommande(cl);
 		assertEquals(1, liste.size());
 
@@ -46,7 +58,7 @@ public class LigneCommandeTest {
 
 	// =================================Test methode getLigneCommande
 	// ======================================//
-	@Ignore
+	
 	@Test
 	@Rollback
 	public void testGetLigneCommande(){
@@ -54,14 +66,16 @@ public class LigneCommandeTest {
 	System.out.println("---------- Tester la méthode getLigneCommande");
 	
 	Client cl = new Client();
+	cl.setEmail("g@g");
+	
 	List<LigneCommande> liste = ligneCommandeService.getLigneCommande(cl);
-	assertEquals(1, liste.size());
+	assertEquals(2, liste.size());
 }
 	
 
 	// =================================Test methode
 	// addLigneCommandePanier======================================//
-	@Ignore
+
 	@Test
 	@Rollback
 	public void testAddLigneCommande(){
@@ -86,7 +100,7 @@ public class LigneCommandeTest {
 	// =================================Test methode
 	// deleteLigneCommandePanier======================================//
 
-	@Ignore
+
 	@Test
 	@Rollback
 	public void testDeleteLigneCommandePanier(){
@@ -106,7 +120,7 @@ public class LigneCommandeTest {
 	// =================================Test methode
 	// updateLigneCommande======================================//
 
-	@Ignore
+
 	@Test
 	@Rollback
 	public void testUpdateLigneCommande(){
