@@ -24,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
-import fr.adaming.model.Formateur;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
