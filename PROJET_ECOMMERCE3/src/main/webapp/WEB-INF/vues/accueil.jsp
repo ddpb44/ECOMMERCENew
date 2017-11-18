@@ -27,6 +27,13 @@
 	<br />
 	<h2 style="text-align: center">
 		<a
+			href="${pageContext.request.contextPath}/admin/produits/pageAdminProduits">
+			Aller vers la page ADMIN Produit</a>
+	</h2>
+	<br />
+	<br />
+	<h2 style="text-align: center">
+		<a
 			href="${pageContext.request.contextPath}/client/principal/pageClient">
 			Aller vers la page Client</a>
 	</h2>

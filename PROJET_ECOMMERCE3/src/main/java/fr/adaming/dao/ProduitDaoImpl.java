@@ -108,7 +108,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	public Produit updateProduit(Produit produit) {
 		Session session = sf.getCurrentSession();
 
-		session.update(produit);
+		session.merge(produit);
 
 		return produit;
 	}

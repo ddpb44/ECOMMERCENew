@@ -110,7 +110,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 		Produit prodOut = prodDao.getProduitById(produit);
 
-		if (prodOut.getId_produit() == produit.getId_produit()) {
+		if (prodOut.getId_produit().equals(produit.getId_produit())) {
 			return prodDao.updateProduit(produit);
 		}
 

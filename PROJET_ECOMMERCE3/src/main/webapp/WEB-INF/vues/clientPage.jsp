@@ -32,6 +32,10 @@
 		<div class="panel-heading">
 			<h2 style="text-align: center" class="text-center">Catalogue
 				Produits</h2>
+			<h5 >
+				<a href="<c:url value="${pageContext.request.contextPath}/deconnection" />">Se
+					déconnecter</a>
+			</h5>
 		</div>
 		<div id="dvContainer">
 			<div class="panel-body">
@@ -70,9 +74,10 @@
 									<td></td>
 									<td class="text-center"><img alt=""
 										src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}" /></td>
-										<td></td>
+									<td></td>
 									<td class="text-center"><a style="color: gold"
-							href="${pageContext.request.contextPath}/client/principal/ajoutViaLienPanier/${cat.id_cat}">ajouter au panier</a></td>
+										href="${pageContext.request.contextPath}/client/principal/ajoutViaLienPanier/${cat.id_cat}">ajouter
+											au panier</a></td>
 								</tr>
 						</c:forEach>
 					</table>

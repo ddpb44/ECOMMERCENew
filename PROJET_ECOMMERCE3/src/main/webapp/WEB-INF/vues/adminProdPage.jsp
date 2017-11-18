@@ -29,10 +29,14 @@
 				<a class="navbar-brand" href="#">HNB</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li role="presentation" class="active"><a
+				<li role="presentation"><a
 					href="${pageContext.request.contextPath}/produit/afficheAjoutProd"
 					style="color: white">Ajouter produit</a></li>
-
+			</ul>
+			<ul class="nav navbar-nav">
+				<li role="presentation"><a
+					href="${pageContext.request.contextPath}/produit/afficheModifProd"
+					style="color: white">Modifier produit</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -51,6 +55,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
+							<td class="text-center"><strong>Aperçu</strong></td>
 								<td class="text-center"><strong>Id Produit </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Designation du
@@ -64,12 +69,14 @@
 								<td class="text-center"><strong>Quantité du
 										produit </strong></td>
 								<td></td>
-								<td class="text-center"><strong>Image</strong></td>
+								<td class="text-center"><strong>Catégorie</strong></td>
 							</tr>
 						</thead>
 						<c:forEach var="prod" items="${listeProd}">
 							<tbody>
 								<tr>
+									<td class="text-center"><img alt=""
+										src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}" /></td>
 									<td class="text-center">${prod.id_produit}</td>
 									<td></td>
 									<td class="text-center">${prod.designation}</td>
@@ -80,8 +87,12 @@
 									<td></td>
 									<td class="text-center">${prod.quantite}</td>
 									<td></td>
-									<td class="text-center"><img alt=""
-										src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}" /></td>
+									<td class="text-center">${prod.cat.nomCategorie}</td>
+									<th><a style="color: gold"
+										href="${pageContext.request.contextPath}/produit/supprimViaLien?pIdProd=${prod.id_produit}">Supprimer</a>
+										| <a style="color: gold"
+										href="${pageContext.request.contextPath}/produit/modifViaLien?pName=${prod.designation}">
+											Modifier </a></th>
 								</tr>
 						</c:forEach>
 					</table>
