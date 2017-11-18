@@ -36,48 +36,86 @@ public class ClientTest {
 	@Rollback
 	public void testIsExistClient() {
 
+		System.out.println("---------- Tester la méthode GetClientByName");
+		
+		Client cl=new Client();
+		cl.setNomClient("rourou");
+		
+		assertEquals(new String("rourou"), clientService.isExist(cl).getNomClient());
+
+
 	}
 
+	// =================================Test methode
+	// getAllClients======================================//
+	@Ignore
+	@Test
+	@Rollback
+	public void testGetAllClients(){
+		
+	System.out.println("---------- Tester la méthode getAllClients");
+	assertEquals(new String("chouchou"), clientService.getAllClients().get(0).getNomClient());
+	}
+
+	// =================================Test methode
+	// getClientByName======================================//
+
+	
+	public void testGetClientByName(){
+		
+		System.out.println("---------- Tester la méthode GetClientByName");
+		assertEquals(new String("d@d"), clientService.getClientByName("c@c").getEmail());
+
+	}
 	// =================================Test methode
 	// addClient======================================//
 
 	// test sur la correspondance des noms
-	
+
 	@Ignore
 	@Test
 	@Rollback
 	public void testAddClient() {
-		
+
 		System.out.println("--------tester la methode addClient");
 
-		Client cl=new Client();
+		Client cl = new Client();
 		cl.setNomClient("Anissa");
 		assertEquals(new String("Anissa"), clientService.addClient(cl).getNomClient());
 
-		
 	}
 
 	// =================================Test methode
 	// updateClient======================================//
-	
+
 	@Ignore
 	@Test
 	@Rollback
-	public void testUpdateClient() {
+	public void testUpdateClientNom() {
+
+		System.out.println("---------- Tester la méthode testUpdateClient");
+		Client cl = clientService.getClientByName("chouchou");
+		cl.setNomClient("nounours");
+		assertEquals(new String("nounours"), clientService.updateClient(cl).getNomClient());
 
 	}
 
 	// =================================Test methode
 	// deleteClient======================================//
-	
+
 	@Ignore
 	@Test
 	@Rollback
-	public void testDeleteClient(){
-		
-		
+	public void testDeleteClientTaille() {
+
+		System.out.println("---------- Tester la méthode deleteClientTaille");
+
+		int listOld = clientService.getAllClients().size();
+		Client cl = clientService.getClientByName("chouchou");
+		clientService.deleteClient(cl);
+
+		assertEquals(listOld - 1, clientService.getAllClients().size());
+
 	}
-	
-	
-	
+
 }

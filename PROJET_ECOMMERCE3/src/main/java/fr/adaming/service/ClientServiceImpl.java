@@ -1,23 +1,30 @@
 package fr.adaming.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IClientDao;
 import fr.adaming.model.Client;
 
-public class ClientServiceImpl implements IClientService{
+@Service
+@Transactional
+public class ClientServiceImpl implements IClientService {
 
 	// Injection des collaborateurs
 	@Autowired
 	private IClientDao clientDao;
-	
-	//setter pour l'injection dependance
+
+	// setter pour l'injection dependance
 	public void setClientDao(IClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
 
-//==========================Les methodes==================================================//
-	
+	// ==========================Les
+	// methodes==================================================//
+
 	/**
 	 * Service method to check if the client exist
 	 * 
@@ -29,7 +36,7 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	/**
-	 * Service method to add a client 
+	 * Service method to add a client
 	 * 
 	 * @param client
 	 * 
@@ -41,7 +48,7 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	/**
-	 * Service method to update a client 
+	 * Service method to update a client
 	 * 
 	 * @param client
 	 * 
@@ -53,7 +60,7 @@ public class ClientServiceImpl implements IClientService{
 	}
 
 	/**
-	 * Service method to delete a client 
+	 * Service method to delete a client
 	 * 
 	 * @param client
 	 * 
@@ -63,6 +70,23 @@ public class ClientServiceImpl implements IClientService{
 	public int deleteClient(Client cl) {
 		return clientDao.deleteClient(cl);
 
+	}
+
+	/**
+	 * Service method to get a client by his name
+	 * 
+	 * @param client
+	 * 
+	 * @return The client searched, recovered from Dao method
+	 */
+	@Override
+	public Client getClientByName(String name) {
+		return clientDao.getClientByName(name);
+	}
+
+	@Override
+	public List<Client> getAllClients() {
+		return clientDao.getAllClients();
 	}
 
 }

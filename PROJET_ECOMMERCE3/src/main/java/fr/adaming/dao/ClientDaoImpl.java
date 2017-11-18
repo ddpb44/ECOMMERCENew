@@ -1,5 +1,7 @@
 package fr.adaming.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,8 +22,9 @@ public class ClientDaoImpl implements IClientDao {
 		this.sf = sf;
 	}
 
-	// =========================les methodes======================================================//
-	
+	// =========================les
+	// methodes======================================================//
+
 	/**
 	 * This method recovers the client in the database
 	 * 
@@ -29,21 +32,21 @@ public class ClientDaoImpl implements IClientDao {
 	 */
 	@Override
 	public Client isExist(Client cl) {
-		
+
 		// recuperation de la session
 		Session s = sf.getCurrentSession();
 		// La requete HQL
 		String req = "FROM Client cl WHERE cl.email=:pEmail AND cl.mdpClient=:pMdp";
 
 		// creation d'un objet query
-		Query query = s.createQuery(req); 
-		
+		Query query = s.createQuery(req);
+
 		// passage des parametres
 		query.setParameter("pMail", cl.getEmail());
 		query.setParameter("pMdp", cl.getMdpClient());
 
 		// envoyer la requete et recuperation du resultat
-		Client clOut = (Client) query.uniqueResult(); 
+		Client clOut = (Client) query.uniqueResult();
 
 		return clOut;
 	}
@@ -57,7 +60,7 @@ public class ClientDaoImpl implements IClientDao {
 	 */
 	@Override
 	public Client addClient(Client cl) {
-		
+
 		// recuperation de la session
 		Session s = sf.getCurrentSession();
 
@@ -74,7 +77,7 @@ public class ClientDaoImpl implements IClientDao {
 	 */
 	@Override
 	public Client updateClient(Client cl) {
-		
+
 		// recuperation de la session
 		Session s = sf.getCurrentSession();
 
@@ -100,7 +103,7 @@ public class ClientDaoImpl implements IClientDao {
 	 */
 	@Override
 	public int deleteClient(Client cl) {
-		
+
 		// recuperation de la session
 		Session s = sf.getCurrentSession();
 
@@ -117,6 +120,50 @@ public class ClientDaoImpl implements IClientDao {
 		int verif = query.executeUpdate();
 
 		return verif;
+	}
+
+	/**
+	 * Get a client from the existing list of client by his name
+	 * 
+	 * @param name
+	 * 
+	 * @return The client searched
+	 */
+	@Override
+	public Client getClientByName(String name) {
+
+		// Recuperation de la session
+		Session s = sf.getCurrentSession();
+
+		// Le requete HQL
+		String req = "FROM Client cl WHERE cl.nomClient=:pNom";
+
+		// Creer un objet query
+		Query query = s.createQuery(req);
+
+		// Passage du param
+		query.setParameter("pNom", name);
+
+		Client clOut = (Client) query.uniqueResult();
+
+		return clOut;
+	}
+
+	@Override
+	public List<Client> getAllClients() {
+
+		// Recuperation de la session
+		Session s = sf.getCurrentSession();
+
+		// Le requete HQL
+		String req = "FROM Client cl";
+
+		// Creer un objet query
+		Query query = s.createQuery(req);
+
+		List<Client> listeClient = query.list();
+
+		return listeClient;
 	}
 
 }
