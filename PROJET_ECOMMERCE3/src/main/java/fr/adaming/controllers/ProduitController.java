@@ -117,7 +117,7 @@ public class ProduitController {
 		model.addAttribute("catAddForm", new Categorie());
 		model.addAttribute("proAddForm", new Produit());
 
-		return "adminPage";
+		return "adminProdPage";
 		
 	}
 	
