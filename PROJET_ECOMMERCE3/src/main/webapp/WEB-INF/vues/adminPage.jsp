@@ -19,6 +19,7 @@
 	src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 <script type="text/javascript"
 	src='<c:url value="/resources/js/java.js"></c:url>'></script>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 </head>
 <body>
 
