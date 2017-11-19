@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
-import fr.adaming.model.Etudiant;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
