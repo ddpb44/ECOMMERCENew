@@ -64,6 +64,19 @@ public class CategorieController {
 	// }
 
 	// Faire la modification
+	/**
+	 * Update a category. Method for main admin
+	 * 
+	 * @param model
+	 *            Contains the page attributes
+	 * @param cat
+	 *            A category to receive the given informations
+	 * @param red
+	 *            Redirection
+	 * @param result
+	 *            Verify the given informations
+	 * @return The main admin page if no error. The update form page if errors.
+	 */
 	@RequestMapping(value = "principal/modifierCat", method = RequestMethod.POST)
 	public String modifCat(Model model, @ModelAttribute("catUpdateForm") Categorie cat, RedirectAttributes red,
 			BindingResult result) {
@@ -94,6 +107,13 @@ public class CategorieController {
 
 	// Recuperer les information via le lien de la categorie de la ligne
 	// associée
+	/**
+	 * Redirect to the update method for the main admin
+	 * 
+	 * @param name
+	 *            The name of the product to update
+	 * @return The update form
+	 */
 	@RequestMapping(value = "principal/modifViaLien", method = RequestMethod.GET)
 	public ModelAndView modifViaLien(@RequestParam("pName") String name) {
 
@@ -106,6 +126,17 @@ public class CategorieController {
 
 	}
 
+	/**
+	 * Delete a category from the table and send an email to an admin with the
+	 * informations of the deleted category
+	 * 
+	 * @param model
+	 *            Contains the page attributes
+	 * @param id
+	 *            The product id to delete
+	 * @return The main admin page
+	 * 
+	 */
 	@RequestMapping(value = "principal/supprimViaLien/{pId}", method = RequestMethod.GET)
 	public String supprimViaLien(Model model, @PathVariable("pId") long id) {
 
@@ -118,7 +149,7 @@ public class CategorieController {
 			// ============ Récupérer la catégorie
 			Categorie cat = new Categorie();
 			cat.setId_cat(id);
-			
+
 			cat = catService.getCatById(cat.getId_cat());
 
 			// ============ Envoyer le mail
@@ -156,6 +187,16 @@ public class CategorieController {
 		return "adminPage";
 	}
 
+	/**
+	 * Add a category
+	 * 
+	 * @param model
+	 *            Contains the page attributes
+	 * @param cat
+	 *            A category to receive the given informations
+	 * 
+	 * @return The admin page
+	 */
 	@RequestMapping(value = "principal/ajouterCat", method = RequestMethod.POST)
 	public String ajoutCat(Model model, @ModelAttribute("catAddForm") Categorie cat) {
 

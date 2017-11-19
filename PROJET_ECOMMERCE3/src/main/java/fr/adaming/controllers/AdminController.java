@@ -73,7 +73,7 @@ public class AdminController {
 	// ===========================================
 
 	/**
-	 * Redirect to the main admin page and show the Categorie list
+	 * Redirect to the main admin page and show the categories and products list
 	 * 
 	 * @param modele
 	 *            Contains the page attributes
@@ -95,6 +95,13 @@ public class AdminController {
 		return "adminPage";
 	}
 
+	/**
+	 * Redirect to the product admin page and show the products list
+	 * 
+	 * @param modele
+	 *            Contains the page attributes
+	 * @return The product admin page
+	 */
 	@RequestMapping(value = "produits/pageAdminProduits", method = RequestMethod.GET)
 	public String affichePageAdminProd(ModelMap modele) {
 
@@ -110,14 +117,14 @@ public class AdminController {
 		return "adminProdPage";
 	}
 
-	// Afficher le formulaire de mail
-	@RequestMapping(value = "principal/pageMail")
-	public String affichePageMail(Model model) {
-
-		model.addAttribute("mail", new SimpleMailMessage());
-
-		return "mailForm";
-
-	}
+//	// Afficher le formulaire de mail
+//	@RequestMapping(value = "principal/pageMail")
+//	public String affichePageMail(Model model) {
+//
+//		model.addAttribute("mail", new SimpleMailMessage());
+//
+//		return "mailForm";
+//
+//	}
 
 }
