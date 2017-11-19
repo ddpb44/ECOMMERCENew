@@ -10,9 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
 <link href='<c:url value="/resources/css/bootstrap.css"></c:url>'
 	rel="stylesheet" />
+<link href='<c:url value="/resources/css/bootstrap-theme.css"></c:url>'
+	rel="stylesheet" />
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 
 </head>
 <body>

@@ -10,15 +10,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
 <link href='<c:url value="/resources/css/bootstrap.css"></c:url>'
 	rel="stylesheet" />
-
+<link href='<c:url value="/resources/css/bootstrap-theme.css"></c:url>'
+	rel="stylesheet" />
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 </head>
 <body>
 
 	<h1 style="color: red; text-align: center">Formulaire de modification</h1>
-
+<div class="formulaire">
 	<form:form class="form-horizontal" method="POST"
 		modelAttribute="proUpdateForm"
 		action="modifProd"
@@ -43,7 +47,7 @@
 		<div class="form-group">
 			<form:label path="description" class="col-sm-2 control-label">Description</form:label>
 			<div class="col-sm-10">
-				<form:input path="description" />
+				<form:textarea path="description" cssStyle="height:100px; width:800px" />
 				<form:errors path="description" class="col-sm-6"></form:errors>
 			</div>
 
@@ -81,14 +85,14 @@
 		<div class="form-group">
 			<form:label path="imageBytes" class="col-sm-2 control-label">imageBytes</form:label>
 			<div class="col-sm-10">
-				<input type="file" name="file" />
+				<input type="file" name="file" style="width:1000px;"/>
 				<form:errors path="imageBytes" class="col-sm-6"></form:errors>
 			</div>
 
 		</div>
 		<input type="submit" value="Modifier un produit"
-			class="btn btn-primary" />
+			class="btn btn-primary" style="margin-left:17%; font-size: 20px"/>
 	</form:form>
-
+</div>
 </body>
 </html>

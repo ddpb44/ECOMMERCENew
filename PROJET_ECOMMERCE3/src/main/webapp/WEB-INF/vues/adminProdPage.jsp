@@ -21,6 +21,10 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/scriptFich.js"></c:url>'></script>
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 <title>AdminProdPage</title>
 </head>
 <body>
@@ -161,7 +165,7 @@
 							<f:label path="cat" class="col-sm-2 control-label">Categorie</f:label>
 							<div class="col-sm-10">
 								<f:select path="cat.id_cat">
-									<f:option value="0" label="Selectionnez une categorie"/>
+									<f:option value="0" label="Selectionnez une categorie" />
 									<f:options items="${listeCat}" itemLabel="nomCategorie"
 										itemValue="id_cat" />
 								</f:select>
