@@ -8,8 +8,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Produit;
 
 @Repository
 public class LigneCommandeDaoImpl implements ILigneCommandeDao {
@@ -29,41 +31,44 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	// =====================================//
 
 	/**
-	 * This method recovers  the commandes lignes list in the database
+	 * This method recovers the commandes lignes list in the database
 	 * 
 	 * @return list which contains all commandes lignes
 	 * 
-	 * */
-	
+	 */
+
 	@Override
 	public List<LigneCommande> GetAllLigneCommande(Client c) {
 
 		// recuperation de la session
-		Session s = sf.getCurrentSession(); 
+		Session s = sf.getCurrentSession();
 
 		// La requete HQL
-		String req = "FROM LigneCommande lc WHERE lc.attCommande.client.id_client=:pIdcl";
-		
+		String req = "FROM LigneCommande lc WHERE lc.attCommande.attClient.id_client=:pIdcl";
+
 		// creation d'un objet query
 		Query query = s.createQuery(req); // recuperation du query de la session
 
 		// passage des paramètres
-		query.setParameter("pIdcl",c.getId_client());
+		query.setParameter("pIdcl", c.getId_client());
 
 		// envoyer la requete et recuperation du resultat
+		@SuppressWarnings("unchecked")
 		List<LigneCommande> liste = query.list();
 
 		return liste;
 	}
-	
+
 	/**
-	 * This method recovers the commandes lignes list for a client in the database
+	 * This method recovers the commandes lignes list for a client in the
+	 * database
 	 * 
-	 * @param c : client to add
+	 * @param c
+	 *            : client to add
 	 * 
 	 * @return list which contains all commandes lignes in stand by
 	 * 
-	 * */
+	 */
 
 	@Override
 	public List<LigneCommande> getLigneCommande(Client c) {
@@ -72,8 +77,8 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		Session s = sf.getCurrentSession();
 
 		// La requete HQL
-		String req = "FROM LigneCommande lc WHERE lc.valide=:pValide_lc AND lc.attCommande.client.id_client=:pIdcl";
-		
+		String req = "FROM LigneCommande lc WHERE lc.valide=:pValide_lc AND lc.attCommande.attClient.id_client=:pIdcl";
+
 		// creation d'un objet query
 		Query query = s.createQuery(req);
 
@@ -91,12 +96,13 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	/**
 	 * This method recovers the commandes lignes in stand by
 	 * 
-	 * @param lc : commande ligne to add
+	 * @param lc
+	 *            : commande ligne to add
 	 * 
 	 * @return list which contains all commandes lignes in stand by
 	 * 
-	 * */
-	
+	 */
+
 	@Override
 	public LigneCommande addLigneCommandePanier(LigneCommande lc) {
 
@@ -109,14 +115,16 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	}
 
 	/**
-	 * This method recovers the commandes lignes which will be delete from the the orders basket
+	 * This method recovers the commandes lignes which will be delete from the
+	 * the orders basket
 	 * 
-	 * @param lc and c: commande ligne and client to add
+	 * @param lc
+	 *            and c: commande ligne and client to add
 	 * 
 	 * @return the deleted commande ligne
 	 * 
-	 * */
-	
+	 */
+
 	@Override
 	public int deleteLigneCommandePanier(LigneCommande lc, Client c) {
 
@@ -141,17 +149,18 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	}
 
 	/**
-	 * This method recovers the commandes lignes which will be update 
+	 * This method recovers the commandes lignes which will be update
 	 * 
-	 * @param lc and c: commande ligne and client to add
+	 * @param lc
+	 *            and c: commande ligne and client to add
 	 * 
 	 * @return the updated commande ligne
 	 * 
-	 * */
-	
+	 */
+
 	@Override
 	public int updateLigneCommande(LigneCommande lc, Client c) {
-		
+
 		// recuperation de la session
 		Session s = sf.getCurrentSession();
 
@@ -171,6 +180,36 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		int verif = query.executeUpdate();
 
 		return verif;
+	}
+
+	@Override
+	public LigneCommande getLigneCommandeById(LigneCommande lc) {
+
+		// recuperation de la session
+		Session s = sf.getCurrentSession();
+
+		return (LigneCommande) s.get(LigneCommande.class, lc.getId_lc());
+	}
+
+	@Override
+	public LigneCommande getLigneCommandeById(int id) {
+
+		// Recuperation de la session
+		Session s = sf.getCurrentSession();
+
+		// Le requete HQL
+		String req = "FROM LigneCommande lc WHERE lc.id_lc=:pId";
+
+		// Creer un objet query
+		Query query = s.createQuery(req);
+
+		// Passage du param
+		query.setParameter("pId", id);
+
+		LigneCommande lc = (LigneCommande) query.uniqueResult();
+
+		return lc;
+
 	}
 
 }

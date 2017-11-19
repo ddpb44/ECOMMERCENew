@@ -89,12 +89,27 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Override
 	public int updateLigneCommande(LigneCommande lc, Client c) {
 
-		LigneCommande lcOut = (LigneCommande) LigneCommandeDao.getLigneCommande(c);
+		LigneCommande lcOut = LigneCommandeDao.getLigneCommandeById(lc);
 
 		if (lcOut.getId_lc() == lc.getId_lc()) {
 			return LigneCommandeDao.updateLigneCommande(lc, c);
 		}
 		return (Integer) null;
+	}
+
+	/**
+	 * Service method to get commande ligne
+	 * 
+	 * @return A  commande ligne recovered from Dao method
+	 */
+	@Override
+	public LigneCommande getLigneCommandeById(LigneCommande lc) {
+		return LigneCommandeDao.getLigneCommandeById(lc);
+	}
+
+	@Override
+	public LigneCommande getLigneCommandeById(int id) {
+		return LigneCommandeDao.getLigneCommandeById(id);
 	}
 
 }

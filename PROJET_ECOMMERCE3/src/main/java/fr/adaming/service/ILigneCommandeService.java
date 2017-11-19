@@ -13,5 +13,6 @@ public interface ILigneCommandeService {
 	public LigneCommande addLigneCommandePanier(LigneCommande lc, Commande co);
 	public int deleteLigneCommandePanier(LigneCommande lc,Client c);
 	public int updateLigneCommande(LigneCommande lc, Client c);
-	
+	public LigneCommande getLigneCommandeById(LigneCommande lc);
+	public LigneCommande getLigneCommandeById(int id);
 }

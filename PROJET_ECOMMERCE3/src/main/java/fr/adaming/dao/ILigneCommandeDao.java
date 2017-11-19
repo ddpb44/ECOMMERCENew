@@ -8,8 +8,16 @@ import fr.adaming.model.LigneCommande;
 public interface ILigneCommandeDao {
 
 	public List<LigneCommande> GetAllLigneCommande(Client c);
+
 	public List<LigneCommande> getLigneCommande(Client c);
+
 	public LigneCommande addLigneCommandePanier(LigneCommande lc);
-	public int deleteLigneCommandePanier(LigneCommande lc,Client c);
+
+	public int deleteLigneCommandePanier(LigneCommande lc, Client c);
+
 	public int updateLigneCommande(LigneCommande lc, Client c);
+
+	public LigneCommande getLigneCommandeById(LigneCommande lc);
+
+	public LigneCommande getLigneCommandeById(int id);
 }
