@@ -19,15 +19,19 @@
 	src='<c:url value="/resources/js/bootstrap.min.js"></c:url>'></script>
 <script type="text/javascript"
 	src='<c:url value="/resources/js/java.js"></c:url>'></script>
-<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 </head>
 <body>
 
-	<h1 align="center">PAGE ADMINISTRATEUR PRINCIPAL</h1>
-	<button type="button" class="btn btn-danger" data-dismiss="modal" style="position: absolute; width: 10%; left: 3%; top: 3%">DECONNEXION</button>
+	<h1 align="center" style="color: indianred">PAGE ADMINISTRATEUR PRINCIPAL</h1>
+	<f:form action="${pageContext.request.contextPath}/blabla" method="GET">
+		<button type="submit" class="btn btn-danger"
+			style="position: absolute; width: 10%; left: 3%; top: 3%">DECONNEXION</button>
+	</f:form>
 
-	<h2 align="left" style="position: absolute; left: 8%">LISTE DES
-		CATEGORIES</h2>
+	<h2 align="left" style="position: absolute; left: 10%; color: lime">LISTE
+		DES CATEGORIES</h2>
 	<button type="button" data-toggle="modal" data-target="#Ajout"
 		style="position: absolute; width: 15%; left: 23%; top: 20%"
 		class="btn btn-primary">AJOUTER UNE CATEGORIE</button>
@@ -36,33 +40,37 @@
 		placeholder="Rechercher"
 		style="position: absolute; width: 15%; left: 3%; top: 20%">
 	<table class="table table-hover"
-		style="position: absolute; width: 35%; left: 3%; top: 25%">
+		style="position: absolute; width: 35%; left: 3%; top: 25%; font-size: 17px">
 		<thead>
 			<tr class="header">
 				<th>ID</th>
 				<th>Nom</th>
 				<th>Description</th>
-				<th>Opérations</th>
+				<th class="op">Opérations</th>
 			</tr>
 		</thead>
-		<tbody id="myTable">
+		<tbody id="myTable" style="color: lime">
 			<c:forEach var="cat" items="${listeCat}">
 				<tr class="bodyTable">
 					<th>${cat.id_cat}</th>
 					<th>${cat.nomCategorie}</th>
 					<th>${cat.description}</th>
-					<th><a style="color: gold"
-						href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a>
-						| <a style="color: gold"
+					<th><a style="color: lime"
+						href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">
+							<img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/close.png"></c:url>'>
+					</a> <a style="color: lime"
 						href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}">
-							Modifier </a></th>
+							<img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/modif.png"></c:url>'>
+					</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
 
-	<div id="Ajout" class="modal fade" role="dialog" >
+	<div id="Ajout" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -87,7 +95,7 @@
 							<label class="control-label col-sm-2" for="cat_description">Description:</label>
 							<div class="col-sm-10">
 								<f:input path="description" class="form-input"
-									id="cat_description"/>
+									id="cat_description" />
 								<f:errors path="description" cssStyle="color:red" />
 							</div>
 						</div>
@@ -118,7 +126,7 @@
 
 
 	<table class="table table-hover"
-		style="position: absolute; width: 55%; right: 3%; top: 25%">
+		style="position: absolute; width: 55%; right: 3%; top: 25%; font-size: 15px;">
 		<thead>
 			<tr class="header">
 				<th>ID</th>
@@ -128,7 +136,7 @@
 				<th>Quantité</th>
 				<th>Catégorie</th>
 				<th>Image</th>
-				<th>Opérations</th>
+				<th class="op">Opérations</th>
 			</tr>
 		</thead>
 		<tbody id="myTableProd">
@@ -143,10 +151,14 @@
 					<td><img alt="Image en cours"
 						src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${pro.id_produit}"></td>
 					<th><a style="color: gold"
-						href="${pageContext.request.contextPath}/admin/principal/supprimProduitViaLien/${pro.id_produit}">Supprimer</a>
-						| <a style="color: gold"
+						href="${pageContext.request.contextPath}/admin/principal/supprimProduitViaLien/${pro.id_produit}">
+							<img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/close.png"></c:url>'>
+					</a> <a style="color: gold"
 						href="${pageContext.request.contextPath}/admin/principal/modifProduitViaLien?pName=${pro.designation}">
-							Modifier </a></th>
+							<img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/modif.png"></c:url>'>
+					</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -163,10 +175,9 @@
 					<h4 class="modal-title">Ajout d'un produit</h4>
 				</div>
 				<div class="modal-body" style="background-color: black">
-				
+
 					<f:form class="form-horizontal" method="POST"
-						modelAttribute="proAddForm"
-						action="insererProduit"
+						modelAttribute="proAddForm" action="insererProduit"
 						enctype="multipart/form-data">
 
 						<div class="form-group">
@@ -205,11 +216,10 @@
 						<div class="form-group">
 							<f:label path="cat" class="col-sm-2 control-label">Categorie</f:label>
 							<div class="col-sm-10">
-								<f:select path="cat">
-									<c:forEach items="${listeCat}" var="cat">
-										<f:option value="${cat}">${cat.nomCategorie}</f:option>
-										<f:errors path="cat" class="col-sm-6"></f:errors>
-									</c:forEach>
+								<f:select path="cat.id_cat">
+									<f:option value="0" label="Selectionnez votre catégorie" />
+									<f:options items="${listeCat}" itemLabel="nomCategorie"
+										itemValue="id_cat" />
 								</f:select>
 							</div>
 						</div>
@@ -228,9 +238,9 @@
 								<button type="submit" class="btn btn-warning">AJOUTER</button>
 							</div>
 						</div>
-						
+
 					</f:form>
-					
+
 				</div>
 				<div class="modal-footer" style="background-color: black">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

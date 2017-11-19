@@ -16,25 +16,30 @@
 	rel="stylesheet" />
 <link href='<c:url value="/resources/css/style.css"></c:url>'
 	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 
 </head>
 
 <body>
 
-	<div class="marque">Concept Store</div>
+	<div align="center" style="font-size: 90px">GoodLifeSTORE</div>
 
-	<div class="slogan">Votre boutique conceptuelle</div>
+	<div align="center" style="font-size: 40px; color: lime">Votre boutique bien-être</div>
 
 	<div class="login">
+	
+		<br/>
+		<br/>
 
-		<h2>Connexion administrateur</h2>
+		<h2 align="center" style="margin-top: -30px">Connexion administrateur</h2>
 
 		<form action="connexion" method="post">
-			Identifiant : <input type="text" name="j_username"> <br />
+			Identifiant : <input class="form-control" type="text" name="j_username" style="width: 85%; margin-left: 7.5%"> <br />
 
-			Mot de passe : <input type="password" name="j_password"> <br />
+			Mot de passe : <input class="form-control" type="password" name="j_password" style="width: 85%; margin-left: 7.5%"> <br />
 
-			<input type="submit" value="Se connecter">
+			<input type="submit" value="Se connecter" class="btn btn-warning" style="width: 30%" >
 		</form>
 
 		<c:if test="${not empty erreur}">
