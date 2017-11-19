@@ -29,63 +29,40 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default" style="background-color: orange;">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">HNB</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li role="presentation"><a
-					href="${pageContext.request.contextPath}/produit/afficheAjoutProd"
-					style="color: white">Ajouter produit</a></li>
-			</ul>
-			<ul class="nav navbar-nav">
-				<li role="presentation"><a
-					href="${pageContext.request.contextPath}/produit/afficheModifProd"
-					style="color: white">Modifier produit</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<h1>${message}</h1>
-
 	<button type="button" data-toggle="modal" data-target="#AjoutAdminPro"
-		style="position: absolute; width: 15%; right: 3%; top: 20%"
+		style="position: absolute; width: 15%; right: 3%; top: 13%"
 		class="btn btn-primary">AJOUTER UN PRODUIT</button>
 
 	<form>
 		<div class="panel-heading">
-			<h2 style="text-align: center" class="text-center">Liste Des
-				Produits</h2>
+			<h1 align="center" style="color: gold">LISTE
+				DES PRODUITS</h1>
 		</div>
 		<input class="form-control" id="searchProduitAdminPro" type="text"
-			placeholder="Rechercher">
+			placeholder="Rechercher" style="width: 70%; margin-left: 10%">
 		<div id="dvContainer">
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
-							<tr>
+							<tr class="header">
 								<td class="text-center"><strong>Aperçu</strong></td>
-								<td class="text-center"><strong>Id Produit </strong></td>
+								<td class="text-center"><strong>Id</strong></td>
 								<td></td>
-								<td class="text-center"><strong>Designation du
-										produit </strong></td>
+								<td class="text-center"><strong>Designation</strong></td>
 								<td></td>
-								<td class="text-center"><strong>Description du
-										produit </strong></td>
+								<td class="text-center"><strong>Description</strong></td>
 								<td></td>
 								<td class="text-center"><strong>Prix </strong></td>
 								<td></td>
-								<td class="text-center"><strong>Quantité du
-										produit </strong></td>
+								<td class="text-center"><strong>Stock</strong></td>
 								<td></td>
 								<td class="text-center"><strong>Catégorie</strong></td>
 							</tr>
 						</thead>
 						<c:forEach var="prod" items="${listeProd}">
-							<tbody id="produitAdminPro">
-								<tr>
+							<tbody>
+								<tr  style="background: rgba(133, 136, 147, 0.7); font-size: 19px">
 									<td class="text-center"><img alt=""
 										src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${prod.id_produit}" /></td>
 									<td class="text-center">${prod.id_produit}</td>
@@ -100,18 +77,20 @@
 									<td></td>
 									<td class="text-center">${prod.cat.nomCategorie}</td>
 									<th><a style="color: gold"
-										href="${pageContext.request.contextPath}/admin/produits/supprimProduitViaLien/${prod.id_produit}">Supprimer</a>
-										| <a style="color: gold"
+										href="${pageContext.request.contextPath}/admin/produits/supprimProduitViaLien/${prod.id_produit}"><img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/close.png"></c:url>'></a>
+										<a style="color: gold"
 										href="${pageContext.request.contextPath}/admin/produits/modifProduitViaLien?pName=${prod.designation}">
-											Modifier </a></th>
+											<img height="20px" width="20px" alt="Supprimer"
+							src='<c:url value="/resources/css/images/modif.png"></c:url>'></a></th>
 								</tr>
 						</c:forEach>
 					</table>
 				</div>
 			</div>
 		</div>
-		<input type="button" value="Enregistrer le catalogue" id="btnPrint"
-			style="position: absolute; width: 20%; left: 40%" />
+		<input type="button" class="btn btn-danger" value="Enregistrer le catalogue" id="btnPrint"
+			style="position: absolute; width: 20%; left: 40%; margin-top: -20px" />
 	</form>
 
 	<div id="AjoutAdminPro" class="modal fade" role="dialog">
