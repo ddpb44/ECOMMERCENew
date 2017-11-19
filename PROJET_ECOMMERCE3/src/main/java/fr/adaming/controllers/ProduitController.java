@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @Controller
-@RequestMapping("/produit")
+@RequestMapping("/admin")
 public class ProduitController {
 
 	// ======================= injection de la dependence
@@ -39,16 +40,21 @@ public class ProduitController {
 		this.prodService = prodService;
 	}
 
-	@RequestMapping(value = "/listeProduits", method = RequestMethod.GET)
-	public ModelAndView afficheListeProduit() {
+	/**
+	 * Show the products list
+	 * 
+	 * @return The main admin page
+	 */
+	// @RequestMapping(value = "/listeProduits", method = RequestMethod.GET)
+	// public ModelAndView afficheListeProduit() {
+	//
+	// // recuperation de la liste de produits
+	// List<Produit> listeProd = prodService.getAllProduits();
+	//
+	// return new ModelAndView("adminProdPage", "listeProd", listeProd);
+	// }
 
-		// recuperation de la liste de produits
-		List<Produit> listeProd = prodService.getAllProduits();
-
-		return new ModelAndView("adminProdPage", "listeProd", listeProd);
-	}
-
-	@RequestMapping(value = "/afficheAjoutProd", method = RequestMethod.GET)
+	@RequestMapping(value = "produits/afficheAjoutProd", method = RequestMethod.GET)
 	// Méthode du formulaire ajouter
 	public ModelAndView afficheFormAjout(Model model) {
 
@@ -60,39 +66,96 @@ public class ProduitController {
 
 	}
 
-	@RequestMapping(value = "/insererProduit", method = RequestMethod.POST)
-	public String soumettreFormAjout(Model model, @ModelAttribute("prodAjout") Produit produit, MultipartFile file) {
+	/**
+	 * The add product method for the product admin
+	 * 
+	 * @param model
+	 * @param produit
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value = "produits/insererProduit", method = RequestMethod.POST)
+	public String soumettreFormAjout(Model model, @ModelAttribute("proAddForm") Produit produit, MultipartFile file) {
+
+		// try {
+		// if (!file.isEmpty()) {
+		// produit.setImageBytes(file.getBytes());
+		// }
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		// long id_cat = produit.getCat().getId_cat();
+		//
+		// System.out.println(id_cat);
+		//
+		// Categorie categorie = catService.getCatById(id_cat);
+		// produit.setCat(categorie);
+		//
+		// System.out.println(produit.getCat());
+
+		// Appelle de la méthode service
+		// Produit prodOut = prodService.addProduit(produit);
+		//
+		//// if (prodOut.getId_produit() != 0) {
+		// // Actualiser la liste
+		// List<Produit> liste = prodService.getAllProduits();
+		// model.addAttribute("listeProd", liste);
+		// List<Categorie> listeCategorie = catService.getAllCategorie();
+		// model.addAttribute("listeCat", listeCategorie);
+		// model.addAttribute("catAddForm", new Categorie());
+		// model.addAttribute("proAddForm", new Produit());
+
+		return "redirect:pageAdminProduits";
+
+		// } else {
+		// return "redirect:pageAdminProduits";
+		// }
+	}
+
+	/**
+	 * The add product method for the product admin
+	 * 
+	 * @param model
+	 * @param produit
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value = "principal/insererProduit", method = RequestMethod.POST)
+	public String AjoutProduitByAdminPrincipal(Model model, @ModelAttribute("proAddForm") Produit proAddForm,
+			MultipartFile file) {
 
 		try {
 			if (!file.isEmpty()) {
-				produit.setImageBytes(file.getBytes());
+				proAddForm.setImageBytes(file.getBytes());
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		long id_cat = produit.getCat().getId_cat();
-		
-		System.out.println(id_cat);
-		
-		Categorie categorie = catService.getCatById(id_cat);
-		produit.setCat(categorie);
-
-		System.out.println(produit.getCat());
+		// long id_cat = produit.getCat().getId_cat();
+		//
+		// System.out.println(id_cat);
+		//
+		// Categorie categorie = catService.getCatById(id_cat);
+		// produit.setCat(categorie);
+		//
+		// System.out.println(produit.getCat());
 
 		// Appelle de la méthode service
-		Produit prodOut = prodService.addProduit(produit);
+		prodService.addProduit(proAddForm);
 
-		if (prodOut.getId_produit() != 0) {
-			// Actualiser la liste
-			List<Produit> liste = prodService.getAllProduits();
-			model.addAttribute("listeProd", liste);
+		// Actualiser la liste
+		List<Produit> liste = prodService.getAllProduits();
+		model.addAttribute("listeProd", liste);
+		List<Categorie> listeCategorie = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategorie);
+		model.addAttribute("catAddForm", new Categorie());
+		model.addAttribute("proAddForm", new Produit());
 
-			return "adminProdPage";
-		} else {
-			return "redirect:afficheAjoutProd";
-		}
+		return "adminPage";
 	}
 
 	@RequestMapping(value = "/photoProd", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -104,36 +167,105 @@ public class ProduitController {
 		else
 			return IOUtils.toByteArray(new ByteArrayInputStream(prod.getImageBytes()));
 	}
-	
-	@RequestMapping(value=("/supprimViaLien"), method=RequestMethod.GET)
-	public String suppViaLien (Model model, @RequestParam("pIdProd") long id){
+
+	/**
+	 * Delete a product by clicking on a link. Method for the main admin.
+	 * 
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = ("principal/supprimProduitViaLien/{pIdProd}"), method = RequestMethod.GET)
+	public String suppViaLienAdminPrincipal(Model model, @PathVariable("pIdProd") long id) {
+
 		Produit prodIn = new Produit();
 		prodIn.setId_produit(id);
-		
+
 		prodService.deleteProduit(prodIn);
-		
+
 		List<Produit> liste = prodService.getAllProduits();
 		model.addAttribute("listeProd", liste);
+		List<Categorie> listeCategories = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategories);
+		model.addAttribute("catAddForm", new Categorie());
+		model.addAttribute("proAddForm", new Produit());
+
+		return "adminPage";
+	}
+
+	/**
+	 * Delete a product by clicking on a link. Method for the product admin.
+	 * 
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = ("produits/supprimProduitViaLien/{pIdProd}"), method = RequestMethod.GET)
+	public String suppViaLienAdminProduit(Model model, @PathVariable("pIdProd") long id) {
+
+		Produit prodIn = new Produit();
+		prodIn.setId_produit(id);
+
+		prodService.deleteProduit(prodIn);
+
+		List<Produit> liste = prodService.getAllProduits();
+		model.addAttribute("listeProd", liste);
+		List<Categorie> listeCategorie = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategorie);
 		model.addAttribute("catAddForm", new Categorie());
 		model.addAttribute("proAddForm", new Produit());
 
 		return "adminProdPage";
-		
 	}
-	
-	@RequestMapping(value = "/afficheModifProd", method = RequestMethod.GET)
-	public String afficheFormModif(Model model) {
-		
-		List<Categorie> listeCategorie = catService.getAllCategorie();
-		model.addAttribute("categoriesListe", listeCategorie);
 
-		model.addAttribute("produitModifier", new Produit());
+	/**
+	 * Show the update product form for the product Admin.
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "produits/afficheModifProd", method = RequestMethod.GET)
+	public String afficheFormModif(Model model) {
+
+		// List<Categorie> listeCategorie = catService.getAllCategorie();
+		// model.addAttribute("categoriesListe", listeCategorie);
+
+		model.addAttribute("proUpdateForm", new Produit());
+
 		return "modifProd";
 	}
 
-	@RequestMapping(value = "/modifProd", method = RequestMethod.POST)
+	/**
+	 * Show the update product form for the main Admin.
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "principal/afficheModifProd", method = RequestMethod.GET)
+	public String afficheFormModifAdminPrincipal(Model model) {
+
+		// List<Categorie> listeCategorie = catService.getAllCategorie();
+		// model.addAttribute("categoriesListe", listeCategorie);
+
+		List<Categorie> listeCategories = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategories);
+		model.addAttribute("proUpdateForm", new Produit());
+
+		return "modifProdAdminPrincipal";
+	}
+
+	/**
+	 * Update a product. Method for product admin
+	 * 
+	 * @param redirectAttribute
+	 * @param model
+	 * @param produit
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value = "produits/modifProd", method = RequestMethod.POST)
 	public String soumettreFormModif(RedirectAttributes redirectAttribute, Model model,
-			@ModelAttribute("produitModifier") Produit produit, MultipartFile file) {
+			@ModelAttribute("proUpdateForm") Produit produit, MultipartFile file) {
 
 		try {
 			if (!file.isEmpty()) {
@@ -144,17 +276,23 @@ public class ProduitController {
 			e.printStackTrace();
 		}
 
-		long id_cat = produit.getCat().getId_cat();
-		
-		Categorie categorie = catService.getCatById(id_cat);
-		produit.setCat(categorie);
-		
+		// long id_cat = produit.getCat().getId_cat();
+		//
+		// Categorie categorie = catService.getCatById(id_cat);
+		// produit.setCat(categorie);
+
 		// Appel de la méthode service
 		Produit prodOut = prodService.updateProduit(produit);
 
-		if (prodOut.getId_produit() == produit.getId_produit()) {
+		if (prodOut != null) {
 			List<Produit> liste = prodService.getAllProduits();
 			model.addAttribute("listeProd", liste);
+
+			List<Categorie> listeCategorie = catService.getAllCategorie();
+			model.addAttribute("listeCat", listeCategorie);
+
+			model.addAttribute("catAddForm", new Categorie());
+			model.addAttribute("proAddForm", new Produit());
 
 			return "adminProdPage";
 		} else {
@@ -163,4 +301,89 @@ public class ProduitController {
 			return "redirect:adminProdPage";
 		}
 	}
+
+	/**
+	 * Update a product. Method for main admin
+	 * 
+	 * @param redirectAttribute
+	 * @param model
+	 * @param produit
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value = "principal/modifProd", method = RequestMethod.POST)
+	public String soumettreFormModifAdminPrincipal(RedirectAttributes redirectAttribute, Model model,
+			@ModelAttribute("proUpdateForm") Produit produit, MultipartFile file) {
+
+		try {
+			if (!file.isEmpty()) {
+				produit.setImageBytes(file.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// long id_cat = produit.getCat().getId_cat();
+		//
+		// Categorie categorie = catService.getCatById(id_cat);
+		// produit.setCat(categorie);
+
+		// Appel de la méthode service
+		Produit prodOut = prodService.updateProduit(produit);
+
+		if (prodOut != null) {
+			List<Produit> liste = prodService.getAllProduits();
+			model.addAttribute("listeProd", liste);
+
+			List<Categorie> listeCategorie = catService.getAllCategorie();
+			model.addAttribute("listeCat", listeCategorie);
+
+			model.addAttribute("catAddForm", new Categorie());
+			model.addAttribute("proAddForm", new Produit());
+
+			return "adminPage";
+		} else {
+			// Message d'erreur si l'étudiant n'a pas été modifié
+			redirectAttribute.addFlashAttribute("message", "Le produit n'a pas été modifié");
+			return "redirect:adminPage";
+		}
+	}
+
+	@RequestMapping(value = "produits/modifProduitViaLien", method = RequestMethod.GET)
+	public String modifProduitViaLien(Model model, @RequestParam("pName") String name) {
+
+		Produit pro = new Produit();
+		pro.setDesignation(name);
+
+		Produit pOut = prodService.getProduitByDes(pro);
+
+		List<Categorie> listeCategories = catService.getAllCategorie();
+
+		model.addAttribute("proUpdateForm", pOut);
+		model.addAttribute("listeCat", listeCategories);
+
+		return "modifProd";
+
+	}
+
+	@RequestMapping(value = "principal/modifProduitViaLien", method = RequestMethod.GET)
+	public String modifPrincipalViaLien(Model model, @RequestParam("pName") String name) {
+
+		Produit pro = new Produit();
+		pro.setDesignation(name);
+
+		Produit pOut = prodService.getProduitByDes(pro);
+		List<Categorie> listeCategories = catService.getAllCategorie();
+
+		List<Categorie> listeCategorie = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategorie);
+
+		model.addAttribute("proUpdateForm", pOut);
+		model.addAttribute("listeCat", listeCategories);
+
+		return "modifProdAdminPrincipal";
+
+	}
+
 }

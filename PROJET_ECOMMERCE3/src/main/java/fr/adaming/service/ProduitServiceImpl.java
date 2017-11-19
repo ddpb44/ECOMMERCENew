@@ -28,11 +28,10 @@ public class ProduitServiceImpl implements IProduitService {
 		this.prodDao = prodDao;
 	}
 
-	
 	// ==================== 3 =====================
 	// Méthodes
 	// ============================================
-	
+
 	/**
 	 * Service method to get the list of all Produits
 	 * 
@@ -57,9 +56,9 @@ public class ProduitServiceImpl implements IProduitService {
 		Produit prodOut = prodDao.getProduitById(produit);
 
 		if (prodOut.getId_produit() != 0) {
-			
-				return prodOut;
-			
+
+			return prodOut;
+
 		}
 		return null;
 	}
@@ -76,10 +75,8 @@ public class ProduitServiceImpl implements IProduitService {
 	public Produit getProduitByDes(Produit produit) {
 		Produit prodOut = prodDao.getProduitByDes(produit);
 
-		if (prodOut.getDesignation() == produit.getDesignation()) {
-			if (prodOut.getCat().getId_cat() == produit.getCat().getId_cat()) {
-				return prodOut;
-			}
+		if (prodOut != null) {
+			return prodOut;
 		}
 		return null;
 	}
@@ -108,13 +105,13 @@ public class ProduitServiceImpl implements IProduitService {
 	@Override
 	public Produit updateProduit(Produit produit) {
 
-		Produit prodOut = prodDao.getProduitById(produit);
-
-		if (prodOut.getId_produit().equals(produit.getId_produit())) {
+//		Produit prodOut = prodDao.getProduitById(produit);
+//
+//		if (prodOut.getId_produit().equals(produit.getId_produit())) {
 			return prodDao.updateProduit(produit);
-		}
-
-		return null;
+//		}
+//
+//		return null;
 	}
 
 	/**
@@ -126,7 +123,7 @@ public class ProduitServiceImpl implements IProduitService {
 	 * @return The deleted Produit recovered from Dao method
 	 */
 	@Override
-	public int deleteProduit(Produit produit) {
+	public Produit deleteProduit(Produit produit) {
 		return prodDao.deleteProduit(produit);
 	}
 

@@ -12,4 +12,11 @@ $(document).ready(function(){
 	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 	    });
 	  });
+  
+  $("#searchProduitAdminPro").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#produitAdminPro tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
 });

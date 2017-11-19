@@ -17,13 +17,13 @@
 </head>
 <body>
 
-	<h1 style="color: red; text-align: center">Formulaire de modification</h1>
+	<h1 style="color: red; text-align: center">Formulaire de
+		modification</h1>
 
 	<form:form class="form-horizontal" method="POST"
-		modelAttribute="proUpdateForm"
-		action="modifProd"
+		modelAttribute="proUpdateForm" action="modifProd"
 		enctype="multipart/form-data">
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="id_produit">Id</label>
 			<div class="col-sm-10">
@@ -31,7 +31,7 @@
 				<form:errors path="id_produit" class="col-sm-6"></form:errors>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<form:label path="designation" class="col-sm-2 control-label">Designation</form:label>
 			<div class="col-sm-10">
@@ -71,9 +71,8 @@
 			<label class="col-sm-2 control-label">Categorie</label>
 			<div class="col-sm-10">
 				<form:select path="cat.id_cat">
-					<form:option value="0" label="Selectionnez une categorie"></form:option>
-					<form:options items="${listeCat}" itemLabel="nomCategorie"
-						itemValue="id_cat" />
+						<form:options items="${listeCat}" itemLabel="nomCategorie"
+							itemValue="id_cat" />
 				</form:select>
 			</div>
 		</div>

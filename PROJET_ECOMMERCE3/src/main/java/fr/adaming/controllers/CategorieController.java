@@ -68,7 +68,7 @@ public class CategorieController {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			
+
 			return "modifAdminCatPage";
 
 		} else {
@@ -110,8 +110,11 @@ public class CategorieController {
 
 		Categorie cat = new Categorie();
 		cat.setId_cat(id);
+
 		catService.deleteCategorie(cat);
 
+		List<Produit> liste = proService.getAllProduits();
+		model.addAttribute("listeProd", liste);
 		List<Categorie> listeCategories = catService.getAllCategorie();
 		model.addAttribute("listeCat", listeCategories);
 		model.addAttribute("catAddForm", new Categorie());

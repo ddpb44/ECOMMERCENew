@@ -140,12 +140,12 @@
 					<th>${pro.prix}</th>
 					<th>${pro.quantite}</th>
 					<th>${pro.cat.nomCategorie}</th>
-					<td><img alt=""
-						src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${pro.id_produit}"></td>
+					<td><img alt="Image en cours"
+						src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${pro.id_produit}"></td>
 					<th><a style="color: gold"
-						href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${pro.id_produit}">Supprimer</a>
+						href="${pageContext.request.contextPath}/admin/principal/supprimProduitViaLien/${pro.id_produit}">Supprimer</a>
 						| <a style="color: gold"
-						href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${pro.designation}">
+						href="${pageContext.request.contextPath}/admin/principal/modifProduitViaLien?pName=${pro.designation}">
 							Modifier </a></th>
 				</tr>
 			</c:forEach>
@@ -163,9 +163,10 @@
 					<h4 class="modal-title">Ajout d'un produit</h4>
 				</div>
 				<div class="modal-body" style="background-color: black">
+				
 					<f:form class="form-horizontal" method="POST"
 						modelAttribute="proAddForm"
-						action="${pageContext.request.contextPath}/produit/insererProduit"
+						action="insererProduit"
 						enctype="multipart/form-data">
 
 						<div class="form-group">
@@ -205,7 +206,7 @@
 							<f:label path="cat" class="col-sm-2 control-label">Categorie</f:label>
 							<div class="col-sm-10">
 								<f:select path="cat">
-									<c:forEach items="${categoriesListe}" var="cat">
+									<c:forEach items="${listeCat}" var="cat">
 										<f:option value="${cat}">${cat.nomCategorie}</f:option>
 										<f:errors path="cat" class="col-sm-6"></f:errors>
 									</c:forEach>
@@ -227,7 +228,9 @@
 								<button type="submit" class="btn btn-warning">AJOUTER</button>
 							</div>
 						</div>
+						
 					</f:form>
+					
 				</div>
 				<div class="modal-footer" style="background-color: black">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

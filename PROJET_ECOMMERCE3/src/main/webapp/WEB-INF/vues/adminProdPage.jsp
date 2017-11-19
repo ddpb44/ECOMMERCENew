@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+
 <!DOCTYPE html >
 <html>
 <head>
@@ -43,19 +45,24 @@
 
 	<h1>${message}</h1>
 
+	<button type="button" data-toggle="modal" data-target="#AjoutAdminPro"
+		style="position: absolute; width: 15%; right: 3%; top: 20%"
+		class="btn btn-primary">AJOUTER UN PRODUIT</button>
 
 	<form>
 		<div class="panel-heading">
 			<h2 style="text-align: center" class="text-center">Liste Des
 				Produits</h2>
 		</div>
+		<input class="form-control" id="searchProduitAdminPro" type="text"
+			placeholder="Rechercher">
 		<div id="dvContainer">
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-							<td class="text-center"><strong>Aperçu</strong></td>
+								<td class="text-center"><strong>Aperçu</strong></td>
 								<td class="text-center"><strong>Id Produit </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Designation du
@@ -73,10 +80,10 @@
 							</tr>
 						</thead>
 						<c:forEach var="prod" items="${listeProd}">
-							<tbody>
+							<tbody id="produitAdminPro">
 								<tr>
 									<td class="text-center"><img alt=""
-										src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}" /></td>
+										src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${prod.id_produit}" /></td>
 									<td class="text-center">${prod.id_produit}</td>
 									<td></td>
 									<td class="text-center">${prod.designation}</td>
@@ -89,9 +96,9 @@
 									<td></td>
 									<td class="text-center">${prod.cat.nomCategorie}</td>
 									<th><a style="color: gold"
-										href="${pageContext.request.contextPath}/produit/supprimViaLien?pIdProd=${prod.id_produit}">Supprimer</a>
+										href="${pageContext.request.contextPath}/admin/produits/supprimProduitViaLien/${prod.id_produit}">Supprimer</a>
 										| <a style="color: gold"
-										href="${pageContext.request.contextPath}/produit/modifViaLien?pName=${prod.designation}">
+										href="${pageContext.request.contextPath}/admin/produits/modifProduitViaLien?pName=${prod.designation}">
 											Modifier </a></th>
 								</tr>
 						</c:forEach>
@@ -102,5 +109,89 @@
 		<input type="button" value="Enregistrer facture" id="btnPrint"
 			style="position: absolute; width: 20%; left: 40%" />
 	</form>
+
+	<div id="AjoutAdminPro" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: black">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Ajout d'un produit</h4>
+				</div>
+				<div class="modal-body" style="background-color: black">
+					<f:form class="form-horizontal" method="POST"
+						modelAttribute="proAddForm"
+						action="${pageContext.request.contextPath}/admin/produits/insererProduit"
+						enctype="multipart/form-data">
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pro_name">Nom:</label>
+							<div class="col-sm-10">
+								<f:input path="designation" class="form-input" id="pro_name" />
+								<f:errors path="designation" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pro_description">Description:</label>
+							<div class="col-sm-10">
+								<f:input path="description" class="form-input"
+									id="pro_description" />
+								<f:errors path="description" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pro_prix">Prix:</label>
+							<div class="col-sm-10">
+								<f:input path="prix" class="form-input" id="pro_prix" />
+								<f:errors path="prix" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pro_quantite">Quantité:</label>
+							<div class="col-sm-10">
+								<f:input path="quantite" class="form-input" id="pro_quantite" />
+								<f:errors path="quantite" cssStyle="color:red" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<f:label path="cat" class="col-sm-2 control-label">Categorie</f:label>
+							<div class="col-sm-10">
+								<f:select path="cat">
+									<c:forEach items="${listeCat}" var="cat">
+										<f:option value="${cat}">${cat.nomCategorie}</f:option>
+										<f:errors path="cat" class="col-sm-6"></f:errors>
+									</c:forEach>
+								</f:select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<f:label path="imageBytes" class="col-sm-2 control-label">imageBytes</f:label>
+							<div class="col-sm-10">
+								<input type="file" name="file" />
+								<f:errors path="imageBytes" class="col-sm-6"></f:errors>
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-warning">AJOUTER</button>
+							</div>
+						</div>
+					</f:form>
+				</div>
+				<div class="modal-footer" style="background-color: black">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

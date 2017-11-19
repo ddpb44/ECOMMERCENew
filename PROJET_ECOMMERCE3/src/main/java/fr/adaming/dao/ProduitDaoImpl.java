@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Repository
@@ -76,7 +77,19 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public Produit getProduitByDes(Produit produit) {
 		Session session = sf.getCurrentSession();
-		return (Produit) session.get(Produit.class, produit.getId_produit());
+
+		// Le requete HQL
+		String req = "FROM Produit pro WHERE pro.designation=:pNom";
+
+		// Creer un objet query
+		Query query = session.createQuery(req);
+
+		// Passage du param
+		query.setParameter("pNom", produit.getDesignation());
+
+		Produit pro_out = (Produit) query.uniqueResult();
+
+		return pro_out;
 	}
 
 	/**
@@ -108,7 +121,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	public Produit updateProduit(Produit produit) {
 		Session session = sf.getCurrentSession();
 
-		session.merge(produit);
+		session.saveOrUpdate(produit);
 
 		return produit;
 	}
@@ -122,18 +135,12 @@ public class ProduitDaoImpl implements IProduitDao {
 	 * @return The deleted Produit
 	 */
 	@Override
-	public int deleteProduit(Produit produit) {
+	public Produit deleteProduit(Produit produit) {
 		Session session = sf.getCurrentSession();
 
-		String req = "delete from Produit p where p.id_produit=:pId";
+		session.delete(produit);
 
-		Query query = session.createQuery(req);
-
-		query.setParameter("pId", produit.getId_produit());
-
-		int verif = query.executeUpdate();
-
-		return verif;
+		return produit;
 	}
 
 }
