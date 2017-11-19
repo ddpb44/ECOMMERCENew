@@ -23,53 +23,54 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/scriptFich.js"></c:url>'></script>
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 
 <title>page client</title>
 </head>
 <body>
-
+	<f:form action="${pageContext.request.contextPath}/blabla" method="GET">
+		<button type="submit" class="btn btn-danger"
+			style="position: absolute; width: 10%; left: 3%; top: 3%">DECONNEXION</button>
+	</f:form>
 	<!-- =====================catalogue produits============================= -->
 	<nav>
+	<div>
 		<div>
-			<div>
-				<button type="button" value="#AjoutLigneCommandeViaLien"
-					style="position: absolute; width: 15%; right: 3%; top: 20%"
-					class="btn btn-primary">Acheter</button>
+			<button type="button" value="#AjoutLigneCommandeViaLien"
+				style="position: absolute; width: 10%; right: 15%; top: 10%"
+				class="btn btn-primary">Acheter</button>
 
-			</div>
-			<br/>
-			<div>
-				<button type="button" value="#AjoutLigneCommandeViaLien"
-					style="position: absolute; width: 15%; right: 3%; top: 20%"
-					class="btn btn-primary">Panier</button>
-
-			</div><br/>
-			<div>
-				<button type="button" value="#AjoutLigneCommandeViaLien"
-					style="position: absolute; width: 15%; right: 3%; top: 20%"
-					class="btn btn-primary">Modifier informations compte
-					client</button>
-
-			</div><br/>
-			<div>
-				<button type="button" value="#AjoutLigneCommandeViaLien"
-					style="position: absolute; width: 15%; right: 3%; top: 20%"
-					class="btn btn-primary">Supprimer compte</button>
-
-			</div>
 		</div>
+		<br />
+		<div>
+			<button type="button" value="#AjoutLigneCommandeViaLien"
+				style="position: absolute; width: 10%; right: 3%; top: 10%"
+				class="btn btn-primary">Panier</button>
+
+		</div>
+		<br />
+		<div>
+			<button type="button" value="#AjoutLigneCommandeViaLien"
+				style="position: absolute; width: 20%; right: 15%; top: 3%"
+				class="btn btn-primary">Modifier informations compte client</button>
+
+		</div>
+		<br />
+		<div>
+			<button type="button" value="#AjoutLigneCommandeViaLien"
+				style="position: absolute; width: 10%; right: 3%; top: 3%"
+				class="btn btn-primary">Supprimer compte</button>
+
+		</div>
+	</div>
 	</nav>
 
 	<form>
-		<div class="panel-heading">
-			<h2 style="text-align: center" class="text-center">Catalogue
-				Produits</h2>
-			<h5>
-				<a
-					href="<c:url value="$${pageContext.request.contextPath}/blabla" />">Se
-					déconnecter</a>
-			</h5>
-		</div>
+		<h1 align="center" style="color: indianred">CATALOGUE DES
+			PRODUITS</h1>
 
 
 		<div id="dvContainer">
@@ -77,26 +78,23 @@
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
-							<tr>
-								<td class="text-center"><strong>Id Produit </strong></td>
+							<tr class="header">
+								<td class="text-center"><strong>Id</strong></td>
 								<td></td>
-								<td class="text-center"><strong>Designation du
-										produit </strong></td>
+								<td class="text-center"><strong>Designation  </strong></td>
 								<td></td>
-								<td class="text-center"><strong>Description du
-										produit </strong></td>
+								<td class="text-center"><strong>Description  </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Prix </strong></td>
 								<td></td>
-								<td class="text-center"><strong>Quantité du
-										produit </strong></td>
+								<td class="text-center"><strong>Stock </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Image</strong></td>
 							</tr>
 						</thead>
 						<c:forEach var="prod" items="${listeProd}">
 							<tbody>
-								<tr>
+								<tr style="background: rgba(133, 136, 147, 0.7); font-size: 19px">
 									<td class="text-center">${prod.id_produit}</td>
 									<td></td>
 									<td class="text-center">${prod.designation}</td>

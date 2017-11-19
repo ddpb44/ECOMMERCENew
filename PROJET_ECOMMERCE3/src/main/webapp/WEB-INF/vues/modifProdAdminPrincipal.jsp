@@ -24,7 +24,7 @@
 
 	<h1 style="color: red; text-align: center">Formulaire de
 		modification</h1>
-
+<div class="formulaire">
 	<form:form class="form-horizontal" method="POST"
 		modelAttribute="proUpdateForm" action="modifProd"
 		enctype="multipart/form-data">
@@ -85,14 +85,14 @@
 		<div class="form-group">
 			<form:label path="imageBytes" class="col-sm-2 control-label">imageBytes</form:label>
 			<div class="col-sm-10">
-				<input type="file" name="file" />
-				<form:errors path="imageBytes" class="col-sm-6"></form:errors>
+				<input type="file" name="file"style="width:1000px;" />
+				<form:errors path="imageBytes" class="col-sm-6" ></form:errors>
 			</div>
 
 		</div>
 		<input type="submit" value="Modifier un produit"
-			class="btn btn-primary" />
+			class="btn btn-primary" style="margin-left:17%; font-size: 20px" />
 	</form:form>
-
+</div>
 </body>
 </html>

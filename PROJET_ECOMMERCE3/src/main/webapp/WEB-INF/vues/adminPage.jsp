@@ -25,6 +25,7 @@
 <body>
 
 	<h1 align="center" style="color: indianred">PAGE ADMINISTRATEUR PRINCIPAL</h1>
+	
 	<f:form action="${pageContext.request.contextPath}/blabla" method="GET">
 		<button type="submit" class="btn btn-danger"
 			style="position: absolute; width: 10%; left: 3%; top: 3%">DECONNEXION</button>
