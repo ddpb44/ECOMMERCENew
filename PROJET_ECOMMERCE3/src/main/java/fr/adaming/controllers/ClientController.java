@@ -160,7 +160,7 @@ public class ClientController {
 		List<Client> listeClient = clientService.getAllClients();
 		model.addAttribute("clientListe", listeClient);
 
-		// ajout : identifiant de la page ajout.jsp
+		// ajout : identifiant de la page ajoutClient.jsp
 		return new ModelAndView("ajoutClient", "clientAjout", new Client());
 
 	}

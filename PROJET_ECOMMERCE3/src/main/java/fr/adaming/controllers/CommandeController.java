@@ -31,7 +31,10 @@ public class CommandeController {
 		this.clientService = clientService;
 	}
 
-	
+	// ==================== methodes==============================================//
+		
+	// ==============================Ajouter commande====================================//
+
 	
 	
 }
