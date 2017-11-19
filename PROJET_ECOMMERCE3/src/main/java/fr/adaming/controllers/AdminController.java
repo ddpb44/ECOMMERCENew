@@ -73,17 +73,6 @@ public class AdminController {
 	// ===========================================
 
 	/**
-	 * Show the website welcome file
-	 * 
-	 * @return The website welcome file
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public String affichePageAccueil() {
-
-		return "accueil";
-	}
-
-	/**
 	 * Redirect to the main admin page and show the Categorie list
 	 * 
 	 * @param modele

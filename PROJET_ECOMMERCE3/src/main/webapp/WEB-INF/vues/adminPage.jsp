@@ -52,9 +52,9 @@
 					<th>${cat.nomCategorie}</th>
 					<th>${cat.description}</th>
 					<th><a style="color: gold"
-						href="${pageContext.request.contextPath}/client/principal/supprimViaLien/${cat.id_cat}">Supprimer</a>
+						href="${pageContext.request.contextPath}/admin/principal/supprimViaLien/${cat.id_cat}">Supprimer</a>
 						| <a style="color: gold"
-						href="${pageContext.request.contextPath}/client/principal/modifViaLien?pName=${cat.nomCategorie}">
+						href="${pageContext.request.contextPath}/admin/principal/modifViaLien?pName=${cat.nomCategorie}">
 							Modifier </a></th>
 				</tr>
 			</c:forEach>

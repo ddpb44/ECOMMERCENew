@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="categories")
 public class Categorie implements Serializable{
@@ -22,8 +25,12 @@ public class Categorie implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id_cat;
 	
+	@NotEmpty(message="Veuillez renseigner ce champ.")
+	@Length(min=1, max=20, message="Le nom ne doit pas excéder 20 caractères.")
 	private String nomCategorie;
 	
+	@NotEmpty(message="Veuillez renseigner ce champ.")
+	@Length(min=1, max=100, message="La description ne doit pas excéder 100 caractères.")
 	private String description;
 	
 	//Association UML en JAVA

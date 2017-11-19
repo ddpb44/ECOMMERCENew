@@ -34,7 +34,7 @@
 	<br />
 	<h2 style="text-align: center">
 		<a
-			href="${pageContext.request.contextPath}/client/principal/pageClient">
+			href="${pageContext.request.contextPath}/client/pageClient">
 			Aller vers la page Client</a>
 	</h2>
 

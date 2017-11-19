@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		response.sendRedirect("client");
+		response.sendRedirect("concept");
 	%>
 
 </body>

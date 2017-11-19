@@ -86,24 +86,13 @@ public class ClientController {
 	// ===========================================
 
 	/**
-	 * Show the website welcome file
-	 * 
-	 * @return The website welcome file
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public String affichePageAccueil() {
-
-		return "accueil";
-	}
-
-	/**
-	 * Redirect to the main admin page and show the Categorie list
+	 * Redirect to the client page and show the products list
 	 * 
 	 * @param modele
 	 *            Contains the page attributes
-	 * @return The main admin page
+	 * @return The client page
 	 */
-	@RequestMapping(value = "principal/pageClient", method = RequestMethod.GET)
+	@RequestMapping(value = "/pageClient", method = RequestMethod.GET)
 	public String affichePageAdmin(ModelMap modele) {
 
 		// Récupérer la liste des catégories

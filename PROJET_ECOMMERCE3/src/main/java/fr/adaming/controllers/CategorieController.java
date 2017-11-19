@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,6 +36,9 @@ public class CategorieController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+
+	@Autowired
+	private IProduitService proService;
 
 	// ===========================================
 	// Setter pour le Service
@@ -58,21 +64,31 @@ public class CategorieController {
 
 	// Faire la modification
 	@RequestMapping(value = "principal/modifierCat", method = RequestMethod.POST)
-	public String modifCat(Model model, @ModelAttribute("catUpdateForm") Categorie cat, RedirectAttributes red) {
+	public String modifCat(Model model, @ModelAttribute("catUpdateForm") Categorie cat, RedirectAttributes red,
+			BindingResult result) {
 
-		Categorie cOut = catService.updateCategorie(cat);
-		if (cOut != null) {
-
-			List<Categorie> listeCategories = catService.getAllCategorie();
-			model.addAttribute("listeCat", listeCategories);
-			model.addAttribute("catAddForm", new Categorie());
-			return "adminPage";
+		if (result.hasErrors()) {
+			
+			return "modifAdminCatPage";
 
 		} else {
-			red.addFlashAttribute("message", "La categorie n'a pas pu être modifiée");
-			return "redirect:afficheModif";
-		}
+			Categorie cOut = catService.updateCategorie(cat);
+			if (cOut != null) {
 
+				List<Categorie> listeCategories = catService.getAllCategorie();
+				List<Produit> listeProduits = proService.getAllProduits();
+				model.addAttribute("listeCat", listeCategories);
+				model.addAttribute("listePro", listeProduits);
+				model.addAttribute("catAddForm", new Categorie());
+				model.addAttribute("proAddForm", new Produit());
+
+				return "redirect:pageAdmin";
+
+			} else {
+				red.addFlashAttribute("message", "La categorie n'a pas pu être modifiée");
+				return "redirect:afficheModif";
+			}
+		}
 	}
 
 	// Recuperer les information via le lien de la categorie de la ligne
@@ -99,6 +115,7 @@ public class CategorieController {
 		List<Categorie> listeCategories = catService.getAllCategorie();
 		model.addAttribute("listeCat", listeCategories);
 		model.addAttribute("catAddForm", new Categorie());
+		model.addAttribute("proAddForm", new Produit());
 
 		return "adminPage";
 	}
@@ -108,37 +125,39 @@ public class CategorieController {
 
 		catService.addCategorie(cat);
 
-//		// Essai envoi de mail
-//		String status = null;
-//		String email = "kikky.gingerchi@hotmail.fr";
-//
-//		try {
-//
+		// // Essai envoi de mail
+		// String status = null;
+		// String email = "kikky.gingerchi@hotmail.fr";
+		//
+		// try {
+		//
 		List<Categorie> listeCategories = catService.getAllCategorie();
 		model.addAttribute("listeCat", listeCategories);
 		model.addAttribute("catAddForm", new Categorie());
-//
-//			MimeMessage message = mailSender.createMimeMessage();
-//			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-//			helper.setFrom("Administrator");
-//			helper.setTo(email);
-//			helper.setSubject("Confirmation de l'ajout d'une catégorie");
-//
-//			String text = "Catégorie :<br />" + "Nom:<b>" + cat.getNomCategorie() + "</b><br />" + "Description:<b>"
-//					+ cat.getDescription() + "</b>";
-//
-//			helper.setText(text, true);
-//			mailSender.send(message);
-//			status = "Confirmation email is sent to your address (" + email + ")";
-//		} catch (MessagingException e) {
-//			status = "There was an error in email sending. Please check your email address: " + email;
-//		}
-//
-//		model.addAttribute("message", status);
+		model.addAttribute("proAddForm", new Produit());
+		//
+		// MimeMessage message = mailSender.createMimeMessage();
+		// MimeMessageHelper helper = new MimeMessageHelper(message, true,
+		// "UTF-8");
+		// helper.setFrom("Administrator");
+		// helper.setTo(email);
+		// helper.setSubject("Confirmation de l'ajout d'une catégorie");
+		//
+		// String text = "Catégorie :<br />" + "Nom:<b>" +
+		// cat.getNomCategorie() + "</b><br />" + "Description:<b>"
+		// + cat.getDescription() + "</b>";
+		//
+		// helper.setText(text, true);
+		// mailSender.send(message);
+		// status = "Confirmation email is sent to your address (" + email +
+		// ")";
+		// } catch (MessagingException e) {
+		// status = "There was an error in email sending. Please check your
+		// email address: " + email;
+		// }
+		//
+		// model.addAttribute("message", status);
 		return "adminPage";
-
-		
-
 	}
 
 }
