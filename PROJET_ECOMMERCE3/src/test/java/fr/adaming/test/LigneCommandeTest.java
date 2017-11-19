@@ -74,6 +74,7 @@ public class LigneCommandeTest {
 	// =================================Test methode
 	// addLigneCommandePanier======================================//
 
+	@Ignore
 	@Test
 	@Rollback
 	public void testAddLigneCommande() {
