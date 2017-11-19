@@ -31,7 +31,7 @@
 			<label class="control-label col-sm-2" for="cat_description">Description:</label>
 			<div class="col-sm-10">
 				<f:input path="description" class="form-control" id="cat_description"/>
-				<f:errors path="description" cssStyle="color:red"/>
+				<f:errors path="description" cssStyle="color:red" />
 			</div>
 		</div>
 		
