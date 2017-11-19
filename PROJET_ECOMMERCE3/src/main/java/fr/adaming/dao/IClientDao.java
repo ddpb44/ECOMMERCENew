@@ -12,5 +12,6 @@ public interface IClientDao {
 	public int deleteClient (Client cl);
 	public Client getClientByName(String name);
 	public List<Client> getAllClients();
-
+	public Client getClientById(Client cl);
+	
 }

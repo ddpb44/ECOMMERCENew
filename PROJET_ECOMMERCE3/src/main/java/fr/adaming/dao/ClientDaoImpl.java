@@ -149,6 +149,13 @@ public class ClientDaoImpl implements IClientDao {
 		return clOut;
 	}
 
+	/**
+	 * Get all client from the existing list of client 
+	 * 
+	 * @param name
+	 * 
+	 * @return The client list 
+	 */
 	@Override
 	public List<Client> getAllClients() {
 
@@ -164,6 +171,21 @@ public class ClientDaoImpl implements IClientDao {
 		List<Client> listeClient = query.list();
 
 		return listeClient;
+	}
+
+	/**
+	 * Get a client from the existing list of client by his id
+	 * 
+	 * @param name
+	 * 
+	 * @return The client searched
+	 */
+	@Override
+	public Client getClientById(Client cl) {
+		
+		// recuperation de la session
+		Session s = sf.getCurrentSession();
+		return (Client) s.get(Client.class, cl.getId_client());
 	}
 
 }

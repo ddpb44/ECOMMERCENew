@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
+import fr.adaming.model.Etudiant;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
@@ -49,7 +52,7 @@ public class ClientController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
+
 	@Autowired
 	private IClientService clientService;
 
@@ -76,7 +79,9 @@ public class ClientController {
 	// ===========================================
 	// PostConstruct
 	// ===========================================
-
+	public void init() {
+		Admin admin = new Admin();
+	}
 	// ===========================================
 	// Méthodes
 	// ===========================================
@@ -109,7 +114,7 @@ public class ClientController {
 
 		modele.addAttribute("listeCat", listeCategories);
 		modele.addAttribute("listeProd", listeProduits);
-		
+
 		return "clientPage";
 	}
 
@@ -135,8 +140,9 @@ public class ClientController {
 		return "mailForm";
 
 	}
-	//======================afficher la liste de clients==============================//
-	
+	// ======================afficher la liste de
+	// clients==============================//
+
 	@RequestMapping(value = "/listeClients", method = RequestMethod.GET)
 	public ModelAndView afficheListeClient() {
 
@@ -145,7 +151,8 @@ public class ClientController {
 
 		return new ModelAndView("adminProdPage", "listeClient", listeClient);
 	}
-	//==============================Ajouter client====================================//
+	// ==============================Ajouter
+	// client====================================//
 
 	@RequestMapping(value = "/afficheAjoutClient", method = RequestMethod.GET)
 	// Méthode du formulaire ajouter
@@ -158,17 +165,16 @@ public class ClientController {
 		return new ModelAndView("ajoutClient", "clientAjout", new Client());
 
 	}
-	
-							//=======================//
-	
-	
+
+	// =======================//
+
 	@RequestMapping(value = "/insererClient", method = RequestMethod.POST)
 	public String soumettreFormAjout(Model model, @ModelAttribute("clientAjout") Client cl, MultipartFile file) {
 
 		// Appelle de la méthode service
 		Client clOut = clientService.addClient(cl);
 
-		if (clOut.getId_client() != 0) {			// Actualiser la liste
+		if (clOut.getId_client() != 0) { // Actualiser la liste
 			List<Client> liste = clientService.getAllClients();
 			model.addAttribute("listeClient", liste);
 
@@ -177,5 +183,122 @@ public class ClientController {
 			return "redirect:afficheAjoutClient";
 		}
 	}
+
+	// ==============================Modifier
+	// client====================================//
+
+	@RequestMapping(value = "/afficheModifClient", method = RequestMethod.GET)
+	public ModelAndView afficherFormModif() {
+
+		return new ModelAndView("modif", "clientModif", new Client());
+
+	}
+
+	// =======================//
+
+	@RequestMapping(value = "/modifierClient", method = RequestMethod.POST)
+	public String soumettreFormModif(RedirectAttributes RedirectAttributes, Model model,
+			@ModelAttribute("clientModif") Client client) {
+
+		// appelle de la methode service
+		Client clOut = clientService.updateClient(client);
+
+		if (clOut.getId_client() != 0) {
+
+			// actualiser la liste dans accueil
+			List<Client> liste = clientService.getAllClients();
+
+			// ajout de la liste au model
+			model.addAttribute("listeClients", liste);
+			return "clientPage";
+
+		} else {
+			// le message d'erreur si le client n'est pas modifié
+			RedirectAttributes.addFlashAttribute("message", "le clientn'a pas été modifié");
+			return "redirect:afficheModifClient";// redirection
+		}
+	}
+
+	// ==============================Supprimer
+	// client====================================//
+	@RequestMapping(value = "/afficheSupClient", method = RequestMethod.GET)
+	public ModelAndView afficherFormSup() {
+
+		return new ModelAndView("sup", "clientSup", new Client());
+
+	}
+
+	// =======================//
+
+	@RequestMapping(value = "/supClient", method = RequestMethod.POST)
+	public String soumettreFormSup(RedirectAttributes RedirectAttributes, Model model,
+			@ModelAttribute("clientsup") Client client) {
+
+		// appelle de la methode service
+		int verif = clientService.deleteClient(client);
+
+		if (verif != 0) {
+
+			// actualiser la liste dans accueil
+			List<Client> liste = clientService.getAllClients();
+
+			// ajout de la liste au model
+			model.addAttribute("listeClients", liste);
+
+			return "clientPage";
+
+		} else {
+			// le message d'erreur si l'etudiant n'est pas modifié
+			RedirectAttributes.addFlashAttribute("message", "le client n'a pas été supprimé");
+			return "redirect:afficheSupClient";// redirection
+		}
+	}
+	// ============================Avec des
+	// liens=========================================//
+
+	@RequestMapping(value = "/SupprimeViaLien", method = RequestMethod.GET)
+	public String supViaLien(Model model, @RequestParam("pId") int id_client) {
+		Client cIn = new Client();
+		cIn.setId_client((long) id_client);
+		clientService.deleteClient(cIn);
+
+		// actualiser la liste
+		List<Client> liste = clientService.getAllClients();
+
+		return "clientPage";
+	}
+
+	// =======================//
+	@RequestMapping(value = "/ModifViaLien{pId}")
+	public String afficheFormModifViaLien(Model model, @PathVariable("pId") int id_client) {
+
+		Client cIn = new Client();
+		cIn.setId_client((long) id_client);
+		clientService.updateClient(cIn);
+		
+		Client clOut = clientService.getClientById(cIn);
+		model.addAttribute("clientModif", clOut);
+
+		return "clientPage";
+
+	}
+
+	// =======================//
+	@RequestMapping(value = "/AjoutViaLien{pId}")
+	public String afficheFormAjoutViaLien(Model model, @PathVariable("pId") int id_client) {
+
+		Client cIn = new Client();
+		cIn.setId_client((long) id_client);
+		clientService.addClient(cIn);
+
+		// actualiser la liste
+		List<Client> liste = clientService.getAllClients();
+
+		return "clientPage";
+
+	}
+
+	// =======================//
+	
 
 }

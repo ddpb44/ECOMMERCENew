@@ -84,9 +84,28 @@ public class ClientServiceImpl implements IClientService {
 		return clientDao.getClientByName(name);
 	}
 
+	/**
+	 * Service method to get a list of clients
+	 * 
+	 * @param client
+	 * 
+	 * @return The clients list, recovered from Dao method
+	 */
 	@Override
 	public List<Client> getAllClients() {
 		return clientDao.getAllClients();
+	}
+
+	/**
+	 * Service method to get a client by his id
+	 * 
+	 * @param client
+	 * 
+	 * @return The client searched, recovered from Dao method
+	 */
+	@Override
+	public Client getClientById(Client cl) {
+		return clientDao.getClientById(cl);
 	}
 
 }
