@@ -77,14 +77,14 @@ public class ProduitController {
 	@RequestMapping(value = "produits/insererProduit", method = RequestMethod.POST)
 	public String soumettreFormAjout(Model model, @ModelAttribute("proAddForm") Produit produit, MultipartFile file) {
 
-		// try {
-		// if (!file.isEmpty()) {
-		// produit.setImageBytes(file.getBytes());
-		// }
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		try {
+			if (!file.isEmpty()) {
+				produit.setImageBytes(file.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// long id_cat = produit.getCat().getId_cat();
 		//
@@ -96,16 +96,17 @@ public class ProduitController {
 		// System.out.println(produit.getCat());
 
 		// Appelle de la méthode service
-		// Produit prodOut = prodService.addProduit(produit);
-		//
-		//// if (prodOut.getId_produit() != 0) {
-		// // Actualiser la liste
-		// List<Produit> liste = prodService.getAllProduits();
-		// model.addAttribute("listeProd", liste);
-		// List<Categorie> listeCategorie = catService.getAllCategorie();
-		// model.addAttribute("listeCat", listeCategorie);
-		// model.addAttribute("catAddForm", new Categorie());
-		// model.addAttribute("proAddForm", new Produit());
+		prodService.addProduit(produit);
+
+		// if (prodOut.getId_produit() != 0) {
+		// Actualiser la liste
+		List<Produit> liste = prodService.getAllProduits();
+		model.addAttribute("listeProd", liste);
+		List<Categorie> listeCategorie = catService.getAllCategorie();
+		model.addAttribute("listeCat", listeCategorie);
+		
+		model.addAttribute("catAddForm", new Categorie());
+		model.addAttribute("proAddForm", new Produit());
 
 		return "redirect:pageAdminProduits";
 

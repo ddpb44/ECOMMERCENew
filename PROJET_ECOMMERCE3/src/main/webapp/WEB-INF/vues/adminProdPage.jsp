@@ -121,8 +121,7 @@
 				</div>
 				<div class="modal-body" style="background-color: black">
 					<f:form class="form-horizontal" method="POST"
-						modelAttribute="proAddForm"
-						action="${pageContext.request.contextPath}/admin/produits/insererProduit"
+						modelAttribute="proAddForm" action="insererProduit"
 						enctype="multipart/form-data">
 
 						<div class="form-group">
@@ -161,11 +160,10 @@
 						<div class="form-group">
 							<f:label path="cat" class="col-sm-2 control-label">Categorie</f:label>
 							<div class="col-sm-10">
-								<f:select path="cat">
-									<c:forEach items="${listeCat}" var="cat">
-										<f:option value="${cat}">${cat.nomCategorie}</f:option>
-										<f:errors path="cat" class="col-sm-6"></f:errors>
-									</c:forEach>
+								<f:select path="cat.id_cat">
+									<f:option value="0" label="Selectionnez une categorie"/>
+									<f:options items="${listeCat}" itemLabel="nomCategorie"
+										itemValue="id_cat" />
 								</f:select>
 							</div>
 						</div>
