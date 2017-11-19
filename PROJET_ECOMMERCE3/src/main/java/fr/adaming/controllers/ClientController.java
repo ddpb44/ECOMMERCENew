@@ -26,10 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 import fr.adaming.service.MailService;
 
@@ -54,6 +56,9 @@ public class ClientController {
 
 	@Autowired
 	private IClientService clientService;
+	
+	@Autowired
+	private ILigneCommandeService ligneCommandeService;
 
 	// ===========================================
 	// Setter pour le Service
@@ -93,7 +98,7 @@ public class ClientController {
 	 * @return The client page
 	 */
 	@RequestMapping(value = "/pageClient", method = RequestMethod.GET)
-	public String affichePageAdmin(ModelMap modele) {
+	public String affichePageClient(ModelMap modele) {
 
 		// Récupérer la liste des catégories
 		List<Categorie> listeCategories = catService.getAllCategorie();
@@ -104,19 +109,6 @@ public class ClientController {
 		modele.addAttribute("listeProd", listeProduits);
 
 		return "clientPage";
-	}
-
-	@RequestMapping(value = "produits/pageClientProduits", method = RequestMethod.GET)
-	public String affichePageAdminProd(ModelMap modele) {
-
-		// Récupérer la liste des catégories
-		List<Categorie> listeCategories = catService.getAllCategorie();
-		List<Produit> listeProduits = prodService.getAllProduits();
-
-		modele.addAttribute("listeCat", listeCategories);
-		modele.addAttribute("listeProd", listeProduits);
-
-		return "clientProdPage";
 	}
 
 	// Afficher le formulaire de mail
@@ -308,6 +300,24 @@ public class ClientController {
 	public String deniedMethod() {
 
 		return "deniedPage";
+	}
+	
+	// ============ Page panier
+	/**
+	 * Redirect to the basket
+	 * 
+	 */
+	@RequestMapping(value = "/panier", method = RequestMethod.GET)
+	public String affichePagePanier(ModelMap modele) {
+
+		Client client = new Client();
+		
+		// Récupérer la liste des catégories
+		List<LigneCommande> listeCommande = ligneCommandeService.GetAllLigneCommande(client);
+
+		modele.addAttribute("listeLigneCommande", listeCommande);
+
+		return "panierPage";
 	}
 
 

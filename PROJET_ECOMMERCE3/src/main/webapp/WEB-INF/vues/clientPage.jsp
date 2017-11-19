@@ -39,17 +39,18 @@
 	<nav>
 	<div>
 		<div>
-			<button type="button" value="#AjoutLigneCommandeViaLien"
-				style="position: absolute; width: 10%; right: 15%; top: 10%"
-				class="btn btn-primary">Acheter</button>
-
+			<f:form action="${pageContext.request.contextPath}/client/panier"
+				method="GET">
+				<button type="submit"
+					style="position: absolute; width: 10%; right: 15%; top: 10%"
+					class="btn btn-primary">Acheter</button>
+			</f:form>
 		</div>
 		<br />
 		<div>
 			<button type="button" value="#AjoutLigneCommandeViaLien"
 				style="position: absolute; width: 10%; right: 3%; top: 10%"
 				class="btn btn-primary">Panier</button>
-
 		</div>
 		<br />
 		<div>
@@ -81,20 +82,23 @@
 							<tr class="header">
 								<td class="text-center"><strong>Id</strong></td>
 								<td></td>
-								<td class="text-center"><strong>Designation  </strong></td>
+								<td class="text-center"><strong>Designation </strong></td>
 								<td></td>
-								<td class="text-center"><strong>Description  </strong></td>
+								<td class="text-center"><strong>Description </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Prix </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Stock </strong></td>
+								<td></td>
+								<td class="text-center"><strong>Catégorie </strong></td>
 								<td></td>
 								<td class="text-center"><strong>Image</strong></td>
 							</tr>
 						</thead>
 						<c:forEach var="prod" items="${listeProd}">
 							<tbody>
-								<tr style="background: rgba(133, 136, 147, 0.7); font-size: 19px">
+								<tr
+									style="background: rgba(133, 136, 147, 0.7); font-size: 19px">
 									<td class="text-center">${prod.id_produit}</td>
 									<td></td>
 									<td class="text-center">${prod.designation}</td>
@@ -104,6 +108,8 @@
 									<td class="text-center">${prod.prix}</td>
 									<td></td>
 									<td class="text-center">${prod.quantite}</td>
+									<td></td>
+									<td class="text-center">${prod.cat.nomCategorie}</td>
 									<td></td>
 									<td class="text-center"><img alt=""
 										src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${prod.id_produit}" /></td>
