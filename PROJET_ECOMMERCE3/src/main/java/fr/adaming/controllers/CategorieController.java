@@ -1,5 +1,6 @@
 package fr.adaming.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -108,17 +109,49 @@ public class CategorieController {
 	@RequestMapping(value = "principal/supprimViaLien/{pId}", method = RequestMethod.GET)
 	public String supprimViaLien(Model model, @PathVariable("pId") long id) {
 
-		Categorie cat = new Categorie();
-		cat.setId_cat(id);
+		// ============ Essai envoi de mail
+		String status = null;
+		String email = "kikky.gingerchi@hotmail.fr";
 
-		catService.deleteCategorie(cat);
+		try {
 
-		List<Produit> liste = proService.getAllProduits();
-		model.addAttribute("listeProd", liste);
-		List<Categorie> listeCategories = catService.getAllCategorie();
-		model.addAttribute("listeCat", listeCategories);
-		model.addAttribute("catAddForm", new Categorie());
-		model.addAttribute("proAddForm", new Produit());
+			// ============ Récupérer la catégorie
+			Categorie cat = new Categorie();
+			cat.setId_cat(id);
+			
+			cat = catService.getCatById(cat.getId_cat());
+
+			// ============ Envoyer le mail
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			helper.setFrom("Administrator");
+			helper.setTo(email);
+			helper.setSubject("Confirmation de la suppression d'une catégorie");
+
+			String text = "Catégorie supprimée :<br />" + "Nom:<b>" + cat.getNomCategorie() + "</b><br />"
+					+ "Description:<b>" + cat.getDescription() + "</b><br />";
+
+			helper.setText(text, true);
+			mailSender.send(message);
+			status = "Confirmation email is sent to your address (" + email + ")";
+
+			// ============ Supprimer la catégorie et ses produits
+			catService.deleteCategorie(cat);
+
+			// ============ Actualiser listes et objets
+			List<Produit> liste = proService.getAllProduits();
+			model.addAttribute("listeProd", liste);
+
+			List<Categorie> listeCategories = catService.getAllCategorie();
+			model.addAttribute("listeCat", listeCategories);
+
+			model.addAttribute("catAddForm", new Categorie());
+			model.addAttribute("proAddForm", new Produit());
+
+		} catch (MessagingException e) {
+
+			status = "There was an error in email sending. Please check your email address: " + email;
+		}
 
 		return "adminPage";
 	}

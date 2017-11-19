@@ -106,7 +106,7 @@
 				</div>
 			</div>
 		</div>
-		<input type="button" value="Enregistrer facture" id="btnPrint"
+		<input type="button" value="Enregistrer le catalogue" id="btnPrint"
 			style="position: absolute; width: 20%; left: 40%" />
 	</form>
 
