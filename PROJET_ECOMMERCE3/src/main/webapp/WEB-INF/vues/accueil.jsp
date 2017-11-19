@@ -15,28 +15,34 @@
 	rel="stylesheet" />
 <link href='<c:url value="/resources/css/style.css"></c:url>'
 	rel="stylesheet" />
-	
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
+
 </head>
 
 <body>
+	<div align="center" style="font-size: 90px">GoodLifeSTORE</div>
 
-	<h2 style="text-align: center">
-		<a href="${pageContext.request.contextPath}/admin/principal/pageAdmin">
-			Aller vers la page ADMIN</a>
-	</h2>
-	<br />
-	<h2 style="text-align: center">
-		<a
-			href="${pageContext.request.contextPath}/admin/produits/pageAdminProduits">
-			Aller vers la page ADMIN Produit</a>
-	</h2>
-	<br />
-	<br />
-	<h2 style="text-align: center">
-		<a
-			href="${pageContext.request.contextPath}/client/pageClient">
-			Aller vers la page Client</a>
-	</h2>
+	<div align="center" style="font-size: 40px; color: lime">Votre
+		boutique bien-être</div>
 
+	<div class="login">
+		<h2 style="text-align: center">
+			<a
+				href="${pageContext.request.contextPath}/admin/principal/pageAdmin" style="color:gold">
+				Aller vers la page ADMIN</a>
+		</h2>
+		<br />
+		<h2 style="text-align: center">
+			<a
+				href="${pageContext.request.contextPath}/admin/produits/pageAdminProduits" style="color:gold">
+				Aller vers la page ADMIN Produit</a>
+		</h2>
+		<br /> <br />
+		<h2 style="text-align: center">
+			<a href="${pageContext.request.contextPath}/client/pageClient" style="color:gold">
+				Aller vers la page Client</a>
+		</h2>
+	</div>
 </body>
 </html>
