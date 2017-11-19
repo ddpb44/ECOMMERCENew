@@ -94,7 +94,7 @@ public class LigneCommandeController {
 		// actualiser la liste
 		List<LigneCommande> liste = ligneCommandeService.GetAllLigneCommande(this.client);
 
-		return "ligneCommandePage";
+		return "panierPage";
 
 	}
 

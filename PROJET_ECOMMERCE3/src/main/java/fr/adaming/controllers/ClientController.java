@@ -282,11 +282,33 @@ public class ClientController {
 		// actualiser la liste
 		List<Client> liste = clientService.getAllClients();
 
-		return "clientPage";
+		return "panierPage";
 
 	}
 
 	// =======================//
-	
+	//==se deconnecter===//
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String seDeconnecter() {
+
+		return "loginPage";
+
+	}
+
+	@RequestMapping(value = "/loginEchec", method = RequestMethod.GET)
+	public String loginErreur(ModelMap modele) {
+
+		modele.addAttribute("erreur", true);
+		return "loginPage";
+
+	}
+
+	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	public String deniedMethod() {
+
+		return "deniedPage";
+	}
+
 
 }
