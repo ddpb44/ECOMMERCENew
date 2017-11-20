@@ -27,7 +27,7 @@
 			access="ROLE_ADMINPROD" />
 
 		<security:intercept-url pattern="/client/**"
-			access="ROLE_CLIENT" />
+		access="ROLE_CLIENT" />
 
 		<!-- Pour utiliser un fomulaire perso -->
 		<security:form-login login-page="/login"
@@ -51,11 +51,20 @@
 		<security:authentication-provider>
 
 			<security:jdbc-user-service
-				data-source-ref="dataSourceBean" users-by-username-query="select mail,mdp,actived from admins where mail=? "
+				data-source-ref="dataSourceBean"
+				users-by-username-query="select mail,mdp,actived from admins where mail=? "
 				authorities-by-username-query="select a.mail, r.nom from admins a, roles r where a.id_admin=r.admin_id and a.mail=?" />
-
-
 		</security:authentication-provider>
+
+		<security:authentication-provider>
+
+			<security:jdbc-user-service
+				data-source-ref="dataSourceBean"
+				users-by-username-query="select email,mdpClient,actived from clients where email=? "
+				authorities-by-username-query="select c.email, r.nom from clients c, roles r where c.email=? and c.role_id=r.id_role" />
+		</security:authentication-provider>
+
+
 	</security:authentication-manager>
 
 
