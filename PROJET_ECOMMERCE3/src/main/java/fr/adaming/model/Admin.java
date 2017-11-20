@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="admins")
 public class Admin implements Serializable {
@@ -21,7 +24,9 @@ public class Admin implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_admin;
 	
+	
 	private String mail;
+	
 	
 	private String mdp;
 	
