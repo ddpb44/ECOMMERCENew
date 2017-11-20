@@ -21,6 +21,10 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/scriptFich.js"></c:url>'></script>
+	
+	<script type="text/javascript"
+	src='<c:url value="/resources/js/java.js"></c:url>'></script>
+	
 <link href='<c:url value="/resources/css/style.css"></c:url>'
 	rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css?family=Indie+Flower"
