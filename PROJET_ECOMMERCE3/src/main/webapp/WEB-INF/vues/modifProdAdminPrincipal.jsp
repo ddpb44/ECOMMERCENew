@@ -48,7 +48,7 @@
 		<div class="form-group">
 			<form:label path="description" class="col-sm-2 control-label">Description</form:label>
 			<div class="col-sm-10">
-				<form:input path="description" />
+				<form:textarea path="description" cssStyle="height:100px; width:800px" />
 				<form:errors path="description" class="col-sm-6"></form:errors>
 			</div>
 
