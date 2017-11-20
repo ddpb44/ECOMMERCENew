@@ -80,13 +80,13 @@ public class LigneCommandeController {
 		return new ModelAndView("ligneCommandeListe", "ligneCommandeAjout", new LigneCommande());
 
 	}
-	
+
 	// =======================//
 	@RequestMapping(value = "/AjoutLigneCommandeViaLien{pId}")
 	public String afficheFormAjoutLigneCommandeViaLien(Model model, @PathVariable("pId") int id_lc) {
 
 		LigneCommande lcIn = new LigneCommande();
-		Commande co=new Commande();
+		Commande co = new Commande();
 		lcIn.setId_lc(id_lc);
 		lcIn.setAttCommande(co);
 		ligneCommandeService.addLigneCommandePanier(lcIn, co);
@@ -99,20 +99,21 @@ public class LigneCommandeController {
 	}
 
 	// ==============================Modifier ligne commande================//
-	
+
 	@RequestMapping(value = "/afficheModifLigneCommande", method = RequestMethod.GET)
 	public ModelAndView afficherFormModifLigneCommande() {
 
 		return new ModelAndView("modifLigneCommande", "ligneCommandeModif", new LigneCommande());
 
 	}
+
 	// =======================//
 	@RequestMapping(value = "/ModifLigneCommandeViaLien{pId}")
 	public String afficheFormModifLigneCommandeViaLien(Model model, @PathVariable("pId") int id_lc) {
 
 		LigneCommande lcIn = new LigneCommande();
 		lcIn.setId_lc(id_lc);
-		
+
 		ligneCommandeService.updateLigneCommande(lcIn, this.client);
 
 		// actualiser la liste
@@ -121,6 +122,7 @@ public class LigneCommandeController {
 		return "ligneCommandePage";
 
 	}
+
 	// ==============================Supprimer ligne commande================//
 	@RequestMapping(value = "/afficheSupLigneCommande", method = RequestMethod.GET)
 	public ModelAndView afficherFormSupLigneCommande() {
@@ -128,13 +130,14 @@ public class LigneCommandeController {
 		return new ModelAndView("sup", "LigneCommandeSup", new LigneCommande());
 
 	}
+
 	// =======================//
 	@RequestMapping(value = "/SupprimeLigneCommandeViaLien", method = RequestMethod.GET)
 	public String supLigneCommandeViaLien(Model model, @RequestParam("pId") int id_lc) {
 
 		LigneCommande lcIn = new LigneCommande();
 		lcIn.setId_lc(id_lc);
-		
+
 		ligneCommandeService.deleteLigneCommandePanier(lcIn, this.client);
 
 		// actualiser la liste
@@ -142,27 +145,42 @@ public class LigneCommandeController {
 
 		return "ligneCommandePage";
 	}
+
 	// ==============================Rechercher ligne commande================//
 	@RequestMapping(value = "/afficheRechercheLigneCommande", method = RequestMethod.GET)
 	public String afficheFormRechercheLigneCommande(ModelMap model) {
-		
+
 		model.addAttribute("ligneCommandeRecherche", new LigneCommande());
-		
+
 		return "rechercheLigneCommande";
 	}
-	
+
 	// =======================//
 	@RequestMapping(value = "/RechercheLigneCommandeViaLien", method = RequestMethod.GET)
 	public String rechercheLigneCommandeViaLien(Model model, @RequestParam("pId") int id_lc) {
 
 		LigneCommande lcIn = new LigneCommande();
 		lcIn.setId_lc(id_lc);
-		
+
 		ligneCommandeService.getLigneCommande(this.client);
 
 		// actualiser la liste
 		List<LigneCommande> liste = ligneCommandeService.GetAllLigneCommande(this.client);
 
 		return "ligneCommandePage";
+	}
+
+	// ==============================Valider ligne commande================//
+
+	@RequestMapping(value = "/afficheValideLigneCommande", method = RequestMethod.GET)
+	public String afficheFormValiderLignecommande(ModelMap model) {
+
+		model.addAttribute("ligneCommandeValide", new LigneCommande());
+
+		return "valideLigneCommande";
+	}
+		// =======================//
+		
+
 	}
 }
