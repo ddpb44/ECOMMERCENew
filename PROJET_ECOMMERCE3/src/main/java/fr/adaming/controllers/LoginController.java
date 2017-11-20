@@ -15,6 +15,13 @@ public class LoginController {
 		return "loginPage";
 	}
 
+	// Methode pour afficher le formulaire de connexion
+		@RequestMapping(value = "/loginClient", method = RequestMethod.GET)
+		public String loginMethodClient() {
+
+			return "loginPageClient";
+		}
+
 	// Deconnexion
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String seDeconnecter() {

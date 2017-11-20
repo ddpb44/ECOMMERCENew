@@ -54,16 +54,19 @@
 		</div>
 		<br />
 		<div>
-			<button type="button" value="#AjoutLigneCommandeViaLien"
+		<a href="${pageContext.request.contextPath}/client/afficheModifClient"><button type="button"
 				style="position: absolute; width: 20%; right: 15%; top: 3%"
-				class="btn btn-primary">Modifier informations compte client</button>
+				class="btn btn-primary">Modifier informations client</button></a>
+			
 
 		</div>
 		<br />
 		<div>
-			<button type="button" value="#AjoutLigneCommandeViaLien"
+		<a
+				href="${pageContext.request.contextPath}/client/afficheSupClient"><button type="button" value="#AjoutLigneCommandeViaLien"
 				style="position: absolute; width: 10%; right: 3%; top: 3%"
-				class="btn btn-primary">Supprimer compte</button>
+				class="btn btn-primary">Supprimer compte</button></a>
+		
 
 		</div>
 	</div>

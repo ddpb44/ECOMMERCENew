@@ -26,12 +26,19 @@
 		<security:intercept-url pattern="/admin/produits/**"
 			access="ROLE_ADMINPROD" />
 
+		<security:intercept-url pattern="/client/**"
+			access="ROLE_CLIENT" />
+
 		<!-- Pour utiliser un fomulaire perso -->
 		<security:form-login login-page="/login"
 			authentication-failure-url="/loginEchec" login-processing-url="/connexion" />
 
+		<security:form-login login-page="/loginClient"
+			authentication-failure-url="/loginEchec" login-processing-url="/connexion" />
+
 		<!-- Pour se deconnecter -->
-		<security:logout logout-success-url="/logout" logout-url="/blabla"/>
+		<security:logout logout-success-url="/logout"
+			logout-url="/blabla" />
 
 		<!-- Specifier l'url à appeler si l'acces est refusé -->
 		<security:access-denied-handler

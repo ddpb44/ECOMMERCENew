@@ -210,7 +210,7 @@ public class ClientController {
 
 	// =======================//
 
-	@RequestMapping(value = "/supClient", method = RequestMethod.POST)
+	@RequestMapping(value = "/sup", method = RequestMethod.POST)
 	public String soumettreFormSup(RedirectAttributes RedirectAttributes, Model model,
 			@ModelAttribute("clientsup") Client client) {
 
