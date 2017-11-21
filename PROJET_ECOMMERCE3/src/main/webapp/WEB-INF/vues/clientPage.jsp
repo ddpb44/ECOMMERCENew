@@ -39,8 +39,8 @@
 	<nav>
 	<div>
 		<div>
-			<f:form action="${pageContext.request.contextPath}/client/panier"
-				method="GET">
+			<f:form action="${pageContext.request.contextPath}/ligneCommande/AjoutLigneCommande"
+				method="POST">
 				<button type="submit"
 					style="position: absolute; width: 10%; right: 15%; top: 10%"
 					class="btn btn-primary">Acheter</button>

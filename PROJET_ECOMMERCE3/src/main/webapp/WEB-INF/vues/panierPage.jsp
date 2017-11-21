@@ -2,11 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 
 
 <link href='<c:url value="/resources/css/bootstrap.css"></c:url>'
@@ -22,6 +25,10 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/scriptFich.js"></c:url>'></script>
+<link href='<c:url value="/resources/css/style.css"></c:url>'
+	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower"
+	rel="stylesheet">
 
 <title>Panier</title>
 </head>
@@ -31,14 +38,26 @@
 	<!-- =====================Recapitulatif du panier============================= -->
 
 	<form>
-		<div class="panel-heading">
-			<h2 style="text-align: center" class="text-center">Catalogue
-				Produits</h2>
-			<h5>
-				<a
-					href="<c:url value="${pageContext.request.contextPath}/deconnection" />">Se
-					déconnecter</a>
-			</h5>
+		<nav>
+		<div>
+			<div>
+				<h5>
+					<a
+						href="<c:url value="${pageContext.request.contextPath}/blabla" />">Se
+						déconnecter</a>
+				</h5>
+			</div>
+			<div>
+				<h5>
+					<a
+						href="<c:url value="/client/pageClient" />">
+						Catalogue produit</a>
+				</h5>
+			</div>
+		</div>
+		</nav>
+		<div>
+			<h2 style="text-align: center" class="text-center">Panier</h2>
 		</div>
 		<div id="dvContainer">
 			<div class="panel-body">
@@ -59,6 +78,8 @@
 								<td class="text-center"><strong>Quantité du
 										produit </strong></td>
 								<td></td>
+								<td class="text-center"><strong>Etat</strong></td>
+								<td></td>
 								<td class="text-center"><strong>Image</strong></td>
 							</tr>
 						</thead>
@@ -75,12 +96,12 @@
 									<td></td>
 									<td class="text-center">${prod.quantite}</td>
 									<td></td>
-									<td class="text-center">${prod.quantite}</td>
+									<td class="text-center">${prod.valide}</td>
 									<td></td>
 									<td class="text-center"><img alt=""
 										src="${pageContext.request.contextPath}/produit/photoProd?id_produit=${prod.id_produit}" /></td>
 									<td></td>
-									
+
 								</tr>
 						</c:forEach>
 					</table>
@@ -89,11 +110,13 @@
 		</div>
 	</form>
 
-
-	<button class="btn btn-primary" type="submit">Valider le
-		panier</button>
+	<f:form
+		action="${pageContext.request.contextPath}/ligneCommande/ValideLigneCommandeViaLien"
+		method="GET">
+		<button class="btn btn-primary" type="submit">Valider le
+			panier</button>
 	valide la commande + redirection vers le recapitulatif panier
 
-
+</f:form>
 </body>
 </html>
